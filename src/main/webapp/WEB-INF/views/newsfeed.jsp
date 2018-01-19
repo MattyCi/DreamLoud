@@ -28,17 +28,16 @@
     <div class="container">
         <div class="row">
             <!-- Newsfeed Common Side Bar Left -->
-            <div class="row hidden-md"
-            <div class="col-md-3 col-sm-4">
+            <div class="col-md-3">
                 <a id="logolink" href="#"><img id="logo" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
                 <div class="sticky-sidebar">
-                    <div class="profile-card col-sm-4">
+                    <div class="profile-card">
                         <img src="http://placehold.it/300x300" alt="user" class="profile-photo"/>
                         <h5><a href="timeline" class="text-white-center">Sarah Cruiz</a></h5>
                     </div>
                     <!--profile card ends-->
 
-                    <div id="chat-block col-sm-4">
+                    <div id="chat-block">
                         <div class="title">Dreamers</div>
                         <ul class="online-users list-inline">
                             <li><a href="newsfeed-messages" title="Linda Lohan"><img src="http://placehold.it/300x300"
@@ -70,7 +69,6 @@
                     <!--chat block ends-->
                 </div>
             </div>
-        </div>
             <div class="col-md-7">
 
                 <!-- Removing Post Create Box
