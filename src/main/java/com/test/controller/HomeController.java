@@ -3,13 +3,18 @@ package com.test.controller;
 import com.test.Helpers.LoginHelper;
 import com.test.Models.AccountEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class HomeController {
+    LoginHelper loginHelper = new LoginHelper();
 
     @RequestMapping("/")
     public ModelAndView helloWorld() {
@@ -23,12 +28,13 @@ public class HomeController {
     }
 
     @RequestMapping("/loginUser")
-    public String loginUser(@RequestParam(required = false, name="email") String email, @RequestParam(required = false, name="password") String password)
+    public String loginUser(@RequestParam(required = false, name="email") String email, @RequestParam(required = false, name="password") String password, HttpServletResponse response)
     {
-        AccountEntity acct = LoginHelper.loginUsingEmailAndPassword(email, password);
+        AccountEntity acct = loginHelper.loginUsingEmailAndPassword(email, password);
         if (acct == null){
             return "redirect:/index";
         } else {
+            setCookie(response, "userId", String.valueOf(acct.getAcctId()));
             return "redirect:/newsfeed";
         }
     }
@@ -69,8 +75,14 @@ public class HomeController {
     }
 
     @RequestMapping("/newsfeed")
-    public String newsfeed() {
-        return "newsfeed";
+    public String newsfeed(Model model, @CookieValue("userId") String userId) {
+        AccountEntity acct = loginHelper.getAcctUsingId(userId);
+        if(acct == null){
+            return "redirect:/index";
+        }else {
+            model.addAttribute("acctInfo", acct);
+            return "newsfeed";
+        }
     }
 
     @RequestMapping("/newsfeed-friends")
@@ -116,6 +128,13 @@ public class HomeController {
     @RequestMapping("/timeline-friends")
     public String timelineFriends() {
         return "timeline-friends";
+    }
+
+    private void setCookie(HttpServletResponse response, String cookieName, String userId) {
+        Cookie userCookie = new Cookie(cookieName, userId);
+        userCookie.setMaxAge(48 * 60 * 60); //sets the cookie for 1 day
+        // demonstrates how we can manually add our own cookie value
+        response.addCookie(userCookie);
     }
 
 

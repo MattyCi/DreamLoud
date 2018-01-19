@@ -7,10 +7,13 @@ import com.test.Models.AccountEntity;
 
 public class LoginHelper {
 
-    private static DreamLoudDao dao = DaoFactory.getInstance(DaoOptions.HIBERNATE_DAO);
+    private DreamLoudDao dao = DaoFactory.getInstance(DaoOptions.HIBERNATE_DAO);
 
-    public static AccountEntity loginUsingEmailAndPassword(String email, String password) {
-        AccountEntity acct = dao.getAccountByEmailAndPassword(email, password);
-        return acct;
+    public  AccountEntity loginUsingEmailAndPassword(String email, String password) {
+        return dao.getAccountByEmailAndPassword(email, password);
+    }
+
+    public AccountEntity getAcctUsingId(String userId){
+        return dao.getAccountById(userId);
     }
 }
