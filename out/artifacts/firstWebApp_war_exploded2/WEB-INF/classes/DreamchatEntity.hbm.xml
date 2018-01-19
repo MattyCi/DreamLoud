@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.test.Models.DreamchatEntity" table="dreamchat" schema="dreamloudPROD">
+        <id name="drmchtId">
+            <column name="DRMCHT_ID" sql-type="int(11)"/>
+        </id>
+        <property name="drmchtTop">
+            <column name="DRMCHT_TOP" sql-type="tinyint(1)"/>
+        </property>
+        <property name="drmchtRplyto">
+            <column name="DRMCHT_RPLYTO" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="drmchtMsg">
+            <column name="DRMCHT_MSG" sql-type="varchar(250)" length="250"/>
+        </property>
+        <property name="drmchtDatetime">
+            <column name="DRMCHT_DATETIME" sql-type="datetime"/>
+        </property>
+    </class>
+</hibernate-mapping>

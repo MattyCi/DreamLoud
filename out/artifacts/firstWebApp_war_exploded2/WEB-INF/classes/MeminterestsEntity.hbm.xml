@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.test.Models.MeminterestsEntity" table="meminterests" schema="dreamloudPROD">
+        <composite-id mapped="true" class="com.test.Models.MeminterestsEntityPK">
+            <key-property name="intrId">
+                <column name="INTR_ID" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="acctId">
+                <column name="ACCT_ID" sql-type="int(11)"/>
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

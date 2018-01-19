@@ -1,0 +1,12 @@
+<!-- Right Side Nav
+================================================= -->
+<div class="col-md-2 static">
+    <ul class="suggestions right-side-nav" id="sticky-sidebar">
+        <li><span><i class="icon ion-ios-paper"></i></span><div class="right-side-nav-text"><a href="newsfeed">My Newsfeed</a></div></li>
+        <li><span><i class="icon ion-ios-people"></i></span><div class="right-side-nav-text"><a href="timeline">My Profile</a></div></li>
+        <li><span><i class="icon ion-ios-people-outline"></i></span><div class="right-side-nav-text"><a href="newsfeed-friends">My Dreamers</a></div></li>
+        <li><span><i class="icon ion-chatboxes"></i></span><div class="right-side-nav-text"><a href="edit-profile-basic">Edit Profile</a></div></li>
+        <li><span><i class="icon ion-images"></i></span><div class="right-side-nav-text"><a href="index">Logout</a></div></li>
+        <li><span><i class="icon ion-ios-videocam"></i></span><div class="right-side-nav-text"><a href="#">Settings</a></div></li> <!--need to make a settings page -->
+    </ul><!--news-feed links ends-->
+</div>
