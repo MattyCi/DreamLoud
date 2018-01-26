@@ -1,6 +1,7 @@
 package com.test.DAOs;
 
 import com.test.Models.AccountEntity;
+import com.test.Models.DreamPostsEntity;
 
 import java.util.ArrayList;
 
@@ -29,4 +30,6 @@ public interface DreamLoudDao {
     void deleteDreamer(String acctId);
 
     AccountEntity getAccountByEmailAndPassword(String email, String password);
+
+    ArrayList<DreamPostsEntity> getDreamPosts(String userId);
 }

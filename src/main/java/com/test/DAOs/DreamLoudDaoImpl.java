@@ -1,8 +1,11 @@
 package com.test.DAOs;
 
 import com.test.Models.AccountEntity;
+import com.test.Models.DreamPostsEntity;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 
@@ -64,5 +67,22 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         AccountEntity acct = (AccountEntity) session.createQuery("from AccountEntity where acctEmail = '" + email + "' and acctPw= '" + password + "'").setMaxResults(1).uniqueResult();
         session.close();
         return acct;
+    }
+
+    public ArrayList<DreamPostsEntity> getDreamPosts(String userId) {
+        ArrayList<DreamPostsEntity> posts = new ArrayList<DreamPostsEntity>();
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            posts = (ArrayList<DreamPostsEntity>) session.createQuery("FROM DreamPostsEntity").list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return posts;
     }
 }

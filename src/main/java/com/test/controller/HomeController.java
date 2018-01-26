@@ -1,7 +1,13 @@
 package com.test.controller;
 
+import com.test.DAOs.DreamLoudDao;
+import com.test.DaoFactory.DaoFactory;
+import com.test.DaoFactory.DaoOptions;
 import com.test.Helpers.LoginHelper;
+import com.test.Helpers.NewsfeedHelper;
 import com.test.Models.AccountEntity;
+import com.test.Models.DreamPostsEntity;
+import com.test.Models.TranslatedPosts;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -11,10 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 @Controller
 public class HomeController {
-    LoginHelper loginHelper = new LoginHelper();
+    private DreamLoudDao dao = DaoFactory.getInstance(DaoOptions.HIBERNATE_DAO);
+    LoginHelper loginHelper = new LoginHelper(dao);
+    NewsfeedHelper newsfeedHelper = new NewsfeedHelper(dao);
 
     @RequestMapping("/")
     public ModelAndView helloWorld() {
@@ -77,10 +86,13 @@ public class HomeController {
     @RequestMapping("/newsfeed")
     public String newsfeed(Model model, @CookieValue("userId") String userId) {
         AccountEntity acct = loginHelper.getAcctUsingId(userId);
+        ArrayList<TranslatedPosts> posts;
         if(acct == null){
             return "redirect:/index";
         }else {
+            posts = newsfeedHelper.getRelatedDreamPosts(userId);
             model.addAttribute("acctInfo", acct);
+            model.addAttribute("dreamPosts", posts);
             return "newsfeed";
         }
     }

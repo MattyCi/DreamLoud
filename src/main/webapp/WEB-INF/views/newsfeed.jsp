@@ -34,7 +34,8 @@
                 <div class="sticky-sidebar">
                     <div class="profile-card">
                         <img src="${userAcct.acctPic}" alt="user" class="profile-photo"/>
-                        <h5><a href="timeline" class="text-white-center">${userAcct.acctFname} ${userAcct.acctLname}</a></h5>
+                        <h5><a href="timeline" class="text-white-center">${userAcct.acctFname} ${userAcct.acctLname}</a>
+                        </h5>
                     </div>
                     <!--profile card ends-->
                     <div id="chat-block">
@@ -97,156 +98,73 @@
 
                 <!-- Post Content -->
                 <!-- Start of Post -->
-                <div class="post-content">
-                    <div class="post-container">
-                        <div>
+                <c:forEach var="post" items="${dreamPosts}">
+                    <div class="post-content">
+                        <div class="post-container">
+                            <div>
 									<span class="text-dream"><a href="timeline" class="profile-link"><i
-                                            class="ion-code-working"></i> Become a Programmer</a>
+                                            class="ion-code-working"></i> ${post.postTitle}</a>
 									<span class="text-dream-follow"><a href="#"><i class="ion-ios-cloud-outline"></i>Follow</a></span></span>
-                            <p class="text-muted-small">52 Dreamers</p>
-                            <div class="line-divider-half"></div>
-                        </div>
-                        <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left"/>
-                        <div class="post-detail">
-                            <div class="user-info">
-                                <h5><a href="timeline" class="profile-link">Kyle Jones</a></h5>
-                                <p class="text-muted">January 12 at 2:15 p.m.</p>
+                                <p class="text-muted-small">52 Dreamers</p>
+                                <div class="line-divider-half"></div>
                             </div>
-                            <div class="line-divider"></div>
-                            <div class="post-text">
-                                <p>My dream has always been to join group XYZ but I'm not sure which route I should
-                                    take. Where should I start?</p>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-comment">
-                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                <p><a href="timeline" class="profile-link">Aaron Board </a>You should probably just give
-                                    up. </p>
-                            </div>
-                            <div class="show-more">
-                                <a class="text-muted-center" onclick="showcomment()" href="#"><i
-                                        class="fa fa-angle-down" aria-hidden="true"></i> Show More</a>
-                            </div>
-                            <div class="hide-comment">
-                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                <p><a href="timeline" class="profile-link">Matt Ciaravino </a>like in 50 seconds for
-                                    good luck </p>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-comment">
-                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                <input type="text" class="form-control" placeholder="Reply">
+                            <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left"/>
+                            <div class="post-detail">
+                                <div class="user-info">
+                                    <h5><a href="timeline" class="profile-link">Kyle Jones</a></h5>
+                                    <p class="text-muted">January 12 at 2:15 p.m.</p>
+                                </div>
+                                <div class="line-divider"></div>
+                                <div class="post-text">
+                                    <p>${post.content}</p>
+                                </div>
+                                <div class="line-divider"></div>
+                                <div class="post-comment">
+                                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
+                                    <p><a href="timeline" class="profile-link">Aaron Board </a>You should probably just
+                                        give
+                                        up. </p>
+                                </div>
+                                <div class="show-more">
+                                    <a class="text-muted-center" onclick="showcomment()" href="#"><i
+                                            class="fa fa-angle-down" aria-hidden="true"></i> Show More</a>
+                                </div>
+                                <div class="hide-comment">
+                                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
+                                    <p><a href="timeline" class="profile-link">Matt Ciaravino </a>like in 50 seconds for
+                                        good luck </p>
+                                </div>
+                                <div class="line-divider"></div>
+                                <div class="post-comment">
+                                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
+                                    <input type="text" class="form-control" placeholder="Reply">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- End of Post -->
-                <div class="post-content">
-                    <div class="post-container">
-                        <div>
-									<span class="text-dream"><a href="timeline" class="profile-link"><i
-                                            class="ion-code-working"></i> Become a Programmer</a>
-									<span class="text-dream-follow"><a href="#"><i class="ion-ios-cloud-outline"></i>Follow</a></span></span>
-                            <p class="text-muted-small">52 Dreamers</p>
-                            <div class="line-divider-half"></div>
-                        </div>
-                        <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left"/>
-                        <div class="post-detail">
-                            <div class="user-info">
-                                <h5><a href="timeline" class="profile-link">Kyle Jones</a></h5>
-                                <p class="text-muted">January 12 at 2:15 p.m.</p>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-text">
-                                <p>My dream has always been to join group XYZ but I'm not sure which route I should
-                                    take. Where should I start?</p>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-comment">
-                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                <p><a href="timeline" class="profile-link">Aaron Board </a>You should probably just give
-                                    up. </p>
-                            </div>
-                            <div class="show-more">
-                                <a class="text-muted-center" onclick="showcomment()" href="#"><i
-                                        class="fa fa-angle-down" aria-hidden="true"></i> Show More</a>
-                            </div>
-                            <div class="hide-comment">
-                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                <p><a href="timeline" class="profile-link">Matt Ciaravino </a>like in 50 seconds for
-                                    good luck </p>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-comment">
-                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                <input type="text" class="form-control" placeholder="Reply">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <!-- End of Post -->
+                </c:forEach>
 
-                <div class="post-content">
-                    <div class="post-container">
-                        <div>
-									<span class="text-dream"><a href="timeline" class="profile-link"><i
-                                            class="ion-code-working"></i> Become a Programmer</a>
-									<span class="text-dream-follow"><a href="#"><i class="ion-ios-cloud-outline"></i>Follow</a></span></span>
-                            <p class="text-muted-small">52 Dreamers</p>
-                            <div class="line-divider-half"></div>
-                        </div>
-                        <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left"/>
-                        <div class="post-detail">
-                            <div class="user-info">
-                                <h5><a href="timeline" class="profile-link">Kyle Jones</a></h5>
-                                <p class="text-muted">January 12 at 2:15 p.m.</p>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-text">
-                                <p>My dream has always been to join group XYZ but I'm not sure which route I should
-                                    take. Where should I start?</p>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-comment">
-                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                <p><a href="timeline" class="profile-link">Aaron Board </a>You should probably just give
-                                    up. </p>
-                            </div>
-                            <div class="show-more">
-                                <a class="text-muted-center" onclick="showcomment()" href="#"><i
-                                        class="fa fa-angle-down" aria-hidden="true"></i> Show More</a>
-                            </div>
-                            <div class="hide-comment">
-                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                <p><a href="timeline" class="profile-link">Matt Ciaravino </a>like in 50 seconds for
-                                    good luck </p>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-comment">
-                                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                <input type="text" class="form-control" placeholder="Reply">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-md-2 sticky-sidebar">
-                <ul class="nav-news-feed">
-                    <li><i class="icon ion-home"></i>
-                        <div><a href="newsfeed">Home</a></div>
-                    </li>
-                    <li><i class="icon ion-person"></i>
-                        <div><a href="newsfeed-friends">My Profile</a></div>
-                    </li>
-                    <li><i class="icon ion-power"></i>
-                        <div><a href="newsfeed-people-nearby">Logout</a></div>
-                    </li>
-                </ul>
             </div>
 
         </div>
+
+        <div class="col-md-2 sticky-sidebar">
+            <ul class="nav-news-feed">
+                <li><i class="icon ion-home"></i>
+                    <div><a href="newsfeed">Home</a></div>
+                </li>
+                <li><i class="icon ion-person"></i>
+                    <div><a href="newsfeed-friends">My Profile</a></div>
+                </li>
+                <li><i class="icon ion-power"></i>
+                    <div><a href="newsfeed-people-nearby">Logout</a></div>
+                </li>
+            </ul>
+        </div>
+
     </div>
+</div>
 </div>
 
 <!--preloader-->
