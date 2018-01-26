@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +24,7 @@
     <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
 </head>
 <body>
-
+<c:set var="userAcct" value="${acctInfo}"/>
 <div id="page-contents">
     <div class="container">
         <div class="row">
@@ -32,8 +33,8 @@
                 <a id="logolink" href="#"><img id="logo" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
                 <div class="sticky-sidebar">
                     <div class="profile-card">
-                        <img src="http://placehold.it/300x300" alt="user" class="profile-photo"/>
-                        <h5><a href="timeline" class="text-white-center">Sarah Cruiz</a></h5>
+                        <img src="${userAcct.acctPic}" alt="user" class="profile-photo"/>
+                        <h5><a href="timeline" class="text-white-center">${userAcct.acctFname} ${userAcct.acctLname}</a></h5>
                     </div>
                     <!--profile card ends-->
                     <div id="chat-block">
