@@ -2,6 +2,7 @@ package com.test.DAOs;
 
 import com.test.Models.AccountEntity;
 import com.test.Models.DreamPostsEntity;
+import com.test.Models.PostCommentsEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -84,5 +85,23 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
             session.close();
         }
         return posts;
+    }
+
+    public ArrayList<PostCommentsEntity> getPostComments(int postId) {
+        ArrayList<PostCommentsEntity> comments = new ArrayList<PostCommentsEntity>();
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            comments = (ArrayList<PostCommentsEntity>) session.createQuery("FROM PostCommentsEntity where postId=" +postId).list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return comments;
+
     }
 }

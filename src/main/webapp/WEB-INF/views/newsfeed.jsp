@@ -100,7 +100,7 @@
                 <!-- Start of Post -->
                 <c:forEach var="post" items="${dreamPosts}">
                     <div class="post-content">
-                        <div class="post-container">
+                        <div class="post-container" id="${post.postId}">
                             <div>
 									<span class="text-dream"><a href="timeline" class="profile-link"><i
                                             class="ion-code-working"></i> ${post.postTitle}</a>
@@ -118,27 +118,26 @@
                                 <div class="post-text">
                                     <p>${post.content}</p>
                                 </div>
-                                <div class="line-divider"></div>
-                                <div class="post-comment">
-                                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                    <p><a href="timeline" class="profile-link">Aaron Board </a>You should probably just
-                                        give
-                                        up. </p>
-                                </div>
-                                <div class="show-more">
-                                    <a class="text-muted-center" onclick="showcomment()" href="#"><i
-                                            class="fa fa-angle-down" aria-hidden="true"></i> Show More</a>
-                                </div>
-                                <div class="hide-comment">
-                                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                    <p><a href="timeline" class="profile-link">Matt Ciaravino </a>like in 50 seconds for
-                                        good luck </p>
-                                </div>
-                                <div class="line-divider"></div>
-                                <div class="post-comment">
-                                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm"/>
-                                    <input type="text" class="form-control" placeholder="Reply">
-                                </div>
+                                <c:forEach var="comment" items="${post.comments}" varStatus="status" >
+                                    <div class="line-divider"></div>
+                                    <c:if test="${status.index == 0}">
+                                        <div class="post-comment">
+                                            <img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/>
+                                            <p><a href="timeline" class="profile-link">${comment.username}</a>
+                                            ${comment.content}</p>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${status.index ==1}">
+                                        <div class="show-more">
+                                            <a class="text-muted-center" onclick="showcomment(${post.postId})"><i
+                                                    class="fa fa-angle-down" aria-hidden="true"></i> Show More</a>
+                                        </div>
+                                    </c:if>
+                                    <div class="hide-comment">
+                                        <img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/>
+                                        <p><a href="timeline" class="profile-link">${comment.username}</a>${comment.content}</p>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -147,21 +146,21 @@
 
             </div>
 
+            <div class="col-md-2 sticky-sidebar">
+                <ul class="nav-news-feed">
+                    <li><i class="icon ion-home"></i>
+                        <div><a href="newsfeed">Home</a></div>
+                    </li>
+                    <li><i class="icon ion-person"></i>
+                        <div><a href="newsfeed-friends">My Profile</a></div>
+                    </li>
+                    <li><i class="icon ion-power"></i>
+                        <div><a href="newsfeed-people-nearby">Logout</a></div>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <div class="col-md-2 sticky-sidebar">
-            <ul class="nav-news-feed">
-                <li><i class="icon ion-home"></i>
-                    <div><a href="newsfeed">Home</a></div>
-                </li>
-                <li><i class="icon ion-person"></i>
-                    <div><a href="newsfeed-friends">My Profile</a></div>
-                </li>
-                <li><i class="icon ion-power"></i>
-                    <div><a href="newsfeed-people-nearby">Logout</a></div>
-                </li>
-            </ul>
-        </div>
 
     </div>
 </div>

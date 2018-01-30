@@ -161,11 +161,12 @@ function initMap() {
 }
 
 // Show/Hide Comments
-function showcomment() {
-    var comments = document.getElementsByClassName("hide-comment");
-    var showmore = document.getElementsByClassName("show-more");
-    for(var i = 0; i < comments.length; i++) {
-        comments[i].style.display = "inline-flex";
+function showcomment(postId) {
+    var post = document.getElementById(postId);
+    var hiddenComments = post.getElementsByClassName("hide-comment");
+    var showmore = post.getElementsByClassName("show-more");
+    for(var i = 0; i < hiddenComments.length; i++) {
+        hiddenComments[i].style.display = "inline-flex";
     }
     for(var i = 0; i < showmore.length; i++) {
         showmore[i].style.display = "none";

@@ -2,6 +2,7 @@ package com.test.DAOs;
 
 import com.test.Models.AccountEntity;
 import com.test.Models.DreamPostsEntity;
+import com.test.Models.PostCommentsEntity;
 
 import java.util.ArrayList;
 
@@ -32,4 +33,6 @@ public interface DreamLoudDao {
     AccountEntity getAccountByEmailAndPassword(String email, String password);
 
     ArrayList<DreamPostsEntity> getDreamPosts(String userId);
+
+    ArrayList<PostCommentsEntity> getPostComments(int postId);
 }

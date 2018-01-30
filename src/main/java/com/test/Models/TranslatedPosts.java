@@ -38,17 +38,26 @@ public class TranslatedPosts {
         this.content = content;
     }
 
-    public ArrayList<String> getComments() {
+    public ArrayList<PostComments> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<String> comments) {
+    public void setComments(ArrayList<PostComments> comments) {
         this.comments = comments;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
     String postTitle;
     String DreamName;
     String content;
-    ArrayList<String> comments;
+    ArrayList<PostComments> comments;
+    String postId;
 
 }
