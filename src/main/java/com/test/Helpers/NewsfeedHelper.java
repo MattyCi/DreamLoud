@@ -22,8 +22,11 @@ public class NewsfeedHelper {
         ArrayList<TranslatedPosts> translatedPosts = new ArrayList<TranslatedPosts>();
         for (DreamPostsEntity post: posts) {
             TranslatedPosts translatedPost = new TranslatedPosts();
+            AccountEntity acct = dao.getAccountById(String.valueOf(post.getAcctId()));
             ArrayList<PostComments> comments = getRelatedComments(post.getDreamPostId());
             translatedPost.setComments(comments);
+            translatedPost.setUserName(acct.getAcctFname() + " " + acct.getAcctLname());
+            translatedPost.setUserPic(acct.getAcctPic());
             translatedPost.setContent(new String(post.getPostContent()));
             translatedPost.setPostTitle(post.getPostTitle());
             translatedPost.setPostId(String.valueOf(post.getDreamPostId()));

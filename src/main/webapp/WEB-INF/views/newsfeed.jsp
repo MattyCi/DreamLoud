@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +96,14 @@
         </div>
     </div>
                 -->
+                <form:form method="POST" action="uploadFile" enctype="multipart/form-data">
+                    File to upload: <input type="file" name="file">
+
+                    Name: <input type="text" name="picName">
+
+
+                    <input type="submit" value="Upload"> Press here to upload the file!
+                </form:form>
 
                 <!-- Post Content -->
                 <!-- Start of Post -->
@@ -108,10 +117,10 @@
                                 <p class="text-muted-small">52 Dreamers</p>
                                 <div class="line-divider-half"></div>
                             </div>
-                            <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left"/>
+                            <img src="${post.userPic}" alt="user" class="profile-photo-md pull-left"/>
                             <div class="post-detail">
                                 <div class="user-info">
-                                    <h5><a href="timeline" class="profile-link">Kyle Jones</a></h5>
+                                    <h5><a href="timeline" class="profile-link">${post.userName}</a></h5>
                                     <p class="text-muted">January 12 at 2:15 p.m.</p>
                                 </div>
                                 <div class="line-divider"></div>

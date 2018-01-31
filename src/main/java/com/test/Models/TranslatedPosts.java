@@ -5,6 +5,29 @@ import java.util.ArrayList;
 public class TranslatedPosts {
 
     String userName;
+    String postTitle;
+    String DreamName;
+    String content;
+    ArrayList<PostComments> comments;
+    String postId;
+    String userPic;
+    String postDate;
+
+    public String getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(String postDate) {
+        this.postDate = postDate;
+    }
+
+    public String getUserPic() {
+        return userPic;
+    }
+
+    public void setUserPic(String userPic) {
+        this.userPic = userPic;
+    }
 
     public String getUserName() {
         return userName;
@@ -54,10 +77,5 @@ public class TranslatedPosts {
         this.postId = postId;
     }
 
-    String postTitle;
-    String DreamName;
-    String content;
-    ArrayList<PostComments> comments;
-    String postId;
 
 }

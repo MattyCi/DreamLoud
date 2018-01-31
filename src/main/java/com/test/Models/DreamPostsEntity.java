@@ -10,6 +10,15 @@ public class DreamPostsEntity {
     private String postTitle;
     private byte[] postContent;
     private byte[] postPic;
+    private Integer acctId;
+
+    public Integer getAcctId() {
+        return acctId;
+    }
+
+    public void setAcctId(Integer acctId) {
+        this.acctId = acctId;
+    }
 
     @Id
     @Column(name = "Dream_postId", nullable = false)
