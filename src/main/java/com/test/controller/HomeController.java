@@ -7,6 +7,7 @@ import com.test.Helpers.LoginHelper;
 import com.test.Helpers.NewsfeedHelper;
 import com.test.Models.AccountEntity;
 import com.test.Models.DreamPostsEntity;
+import com.test.Models.PostCommentsEntity;
 import com.test.Models.TranslatedPosts;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,7 +85,7 @@ public class HomeController {
     }
 
     @RequestMapping("/newsfeed")
-    public String newsfeed(Model model, @CookieValue("userId") String userId) {
+    public String newsfeed(Model model, @CookieValue(required = false, name = "userId") String userId) {
         AccountEntity acct = loginHelper.getAcctUsingId(userId);
         ArrayList<TranslatedPosts> posts;
         if(acct == null){
@@ -95,6 +96,16 @@ public class HomeController {
             model.addAttribute("dreamPosts", posts);
             return "newsfeed";
         }
+    }
+
+    @RequestMapping("/postComment")
+    public String postComment(@RequestParam(required = false, name = "commentContent") String commentContent, @RequestParam(required = false, name = "userId") String userId, @RequestParam(required = false, name = "postId") String postId) {
+        PostCommentsEntity comment = new PostCommentsEntity();
+        comment.setCommentContent(commentContent.getBytes());
+        comment.setAcctId(Integer.parseInt(userId));
+        comment.setPostId(Integer.parseInt(postId));
+        newsfeedHelper.postComment(comment);
+        return "redirect:/newsfeed";
     }
 
     @RequestMapping("/newsfeed-friends")

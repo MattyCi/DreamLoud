@@ -35,4 +35,6 @@ public interface DreamLoudDao {
     ArrayList<DreamPostsEntity> getDreamPosts(String userId);
 
     ArrayList<PostCommentsEntity> getPostComments(int postId);
+
+    void postComment(PostCommentsEntity comment);
 }

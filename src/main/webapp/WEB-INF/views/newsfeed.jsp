@@ -42,27 +42,27 @@
                     <div id="chat-block">
                         <div class="title">Dreamers</div>
                         <ul class="online-users list-inline">
-                            <li><a href="newsfeed-messages" title="Linda Lohan"><img src="http://placehold.it/300x300"
+                            <li><a href="newsfeed-messages" title="Linda Lohan"><img src="resources/images/profiles/PF1.jpg"
                                                                                      alt="user"
                                                                                      class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="Sophia Lee"><img src="http://placehold.it/300x300"
+                            <li><a href="newsfeed-messages" title="Sophia Lee"><img src="resources/images/profiles/PF2.png"
                                                                                     alt="user"
                                                                                     class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="John Doe"><img src="http://placehold.it/300x300"
+                            <li><a href="newsfeed-messages" title="John Doe"><img src="resources/images/profiles/PF3.jpeg"
                                                                                   alt="user"
                                                                                   class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="Alexis Clark"><img src="http://placehold.it/300x300"
+                            <li><a href="newsfeed-messages" title="Alexis Clark"><img src="resources/images/profiles/PF4.jpeg"
                                                                                       alt="user"
                                                                                       class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="James Carter"><img src="http://placehold.it/300x300"
+                            <li><a href="newsfeed-messages" title="James Carter"><img src="resources/images/profiles/PF5.jpg"
                                                                                       alt="user"
                                                                                       class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="Robert Cook"><img src="http://placehold.it/300x300"
+                            <li><a href="newsfeed-messages" title="Robert Cook"><img src="resources/images/profiles/PF6.jpg"
                                                                                      alt="user"
                                                                                      class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
@@ -124,8 +124,7 @@
                                     <c:if test="${status.index == 0}">
                                         <div class="post-comment">
                                             <img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/>
-                                            <p><a href="timeline" class="profile-link">${comment.username}</a>
-                                            ${comment.content}</p>
+                                            <p><a href="timeline" class="profile-link">${comment.username}</a>: ${comment.content}</p>
                                         </div>
                                     </c:if>
                                     <c:if test="${status.index ==1}">
@@ -136,14 +135,23 @@
                                     </c:if>
                                     <div class="hide-comment">
                                         <img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/>
-                                        <p><a href="timeline" class="profile-link">${comment.username}</a>${comment.content}</p>
+                                        <p><a href="timeline" class="profile-link">${comment.username}</a>: ${comment.content}</p>
                                     </div>
                                 </c:forEach>
+                                <div class="post-comment">
+                                    <img src="${acctInfo.acctPic}" alt="" class="profile-photo-sm">
+                                    <form:form action="/postComment">
+                                        <input type="hidden" name="postId" value="${post.postId}">
+                                        <input type="hidden" name="userId" value="${acctInfo.acctId}">
+                                        <input type="text" name="commentContent" class="form-control" placeholder="Post a comment">
+                                    </form:form>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- End of Post -->
                 </c:forEach>
+
 
             </div>
 

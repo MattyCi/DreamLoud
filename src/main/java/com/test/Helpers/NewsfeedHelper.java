@@ -49,4 +49,7 @@ public class NewsfeedHelper {
         return comments;
     }
 
+    public void postComment(PostCommentsEntity comment) {
+        dao.postComment(comment);
+    }
 }
