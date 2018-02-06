@@ -11,7 +11,22 @@ public class DreamPostsEntity {
     private byte[] postContent;
     private byte[] postPic;
     private Integer acctId;
+    private Integer dreamId;
 
+
+
+    @Basic
+    @Column(name = "DRM_ID", nullable = false)
+    public Integer getDreamId() {
+        return dreamId;
+    }
+
+    public void setDreamId(Integer dreamId) {
+        this.dreamId = dreamId;
+    }
+
+    @Basic
+    @Column(name = "ACCT_ID", nullable = false)
     public Integer getAcctId() {
         return acctId;
     }

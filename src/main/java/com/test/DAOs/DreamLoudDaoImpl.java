@@ -2,6 +2,7 @@ package com.test.DAOs;
 
 import com.test.Models.AccountEntity;
 import com.test.Models.DreamPostsEntity;
+import com.test.Models.DreamsEntity;
 import com.test.Models.PostCommentsEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -118,5 +119,12 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         } finally {
             session.close();
         }
+    }
+
+    public DreamsEntity getDreamById(Integer dreamId) {
+        Session session = factory.openSession();
+        DreamsEntity dream = (DreamsEntity) session.createQuery("from DreamsEntity where drmId =" + dreamId).setMaxResults(1).uniqueResult();
+        session.close();
+        return dream;
     }
 }

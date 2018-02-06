@@ -104,7 +104,7 @@
                         <div class="post-container" id="${post.postId}">
                             <div>
 									<span class="text-dream"><a href="timeline" class="profile-link"><i
-                                            class="ion-code-working"></i> ${post.postTitle}</a>
+                                            class="ion-code-working"></i> ${post.dreamName}</a>
 									<span class="text-dream-follow"><a href="#"><i class="ion-ios-cloud-outline"></i>Follow</a></span></span>
                                 <p class="text-muted-small">52 Dreamers</p>
                                 <div class="line-divider-half"></div>

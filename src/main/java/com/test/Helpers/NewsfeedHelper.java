@@ -2,8 +2,6 @@ package com.test.Helpers;
 
 import com.test.DAOs.DreamLoudDao;
 import com.test.Models.*;
-import javafx.geometry.Pos;
-import org.hibernate.boot.jaxb.SourceType;
 
 import java.util.ArrayList;
 
@@ -24,12 +22,14 @@ public class NewsfeedHelper {
             TranslatedPosts translatedPost = new TranslatedPosts();
             AccountEntity acct = dao.getAccountById(String.valueOf(post.getAcctId()));
             ArrayList<PostComments> comments = getRelatedComments(post.getDreamPostId());
+            DreamsEntity dream = dao.getDreamById(post.getDreamId());
             translatedPost.setComments(comments);
             translatedPost.setUserName(acct.getAcctFname() + " " + acct.getAcctLname());
             translatedPost.setUserPic(acct.getAcctPic());
             translatedPost.setContent(new String(post.getPostContent()));
             translatedPost.setPostTitle(post.getPostTitle());
             translatedPost.setPostId(String.valueOf(post.getDreamPostId()));
+            translatedPost.setDreamName(dream.getDrmName());
             translatedPosts.add(translatedPost);
         }
         return translatedPosts;
