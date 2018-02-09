@@ -103,9 +103,19 @@
                     <div class="post-content">
                         <div class="post-container" id="${post.postId}">
                             <div>
+                                <p id="followMessage">${followMessage}</p>
 									<span class="text-dream"><a href="timeline" class="profile-link"><i
                                             class="ion-code-working"></i> ${post.dreamName}</a>
-									<span class="text-dream-follow"><a href="#"><i class="ion-ios-cloud-outline"></i>Follow</a></span></span>
+                                        <form:form action="/followDream" id="followForm_${post.postId}">
+                                            <input type="hidden" name="dreamId" value="${post.dreamId}"/>
+                                            <span class="text-dream-follow">
+                                                <i class="ion-ios-cloud-outline"></i>
+                                                    <a onclick="document.getElementById('followForm_${post.postId}').submit();">
+                                                    Follow
+                                                    </a>
+                                            </span>
+                                        </form:form>
+                                    </span>
                                 <p class="text-muted-small">52 Dreamers</p>
                                 <div class="line-divider-half"></div>
                             </div>

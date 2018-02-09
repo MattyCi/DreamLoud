@@ -30,6 +30,7 @@ public class NewsfeedHelper {
             translatedPost.setPostTitle(post.getPostTitle());
             translatedPost.setPostId(String.valueOf(post.getDreamPostId()));
             translatedPost.setDreamName(dream.getDrmName());
+            translatedPost.setDreamId(String.valueOf(dream.getDrmId()));
             translatedPosts.add(translatedPost);
         }
         return translatedPosts;
@@ -51,5 +52,33 @@ public class NewsfeedHelper {
 
     public void postComment(PostCommentsEntity comment) {
         dao.postComment(comment);
+    }
+
+    public boolean followDream(String userId, String dreamId) {
+        DreammemsEntity dreammemsEntity = new DreammemsEntity();
+        dreammemsEntity.setAcctId(Integer.parseInt(userId));
+        dreammemsEntity.setDrmId(Integer.parseInt(dreamId));
+        DreammemsEntity dreamCheck = dao.getDremMemByUserIdAndDrmId(Integer.parseInt(userId), Integer.parseInt(dreamId));
+        if(dreamCheck == null) {
+            try {
+                dao.followDream(dreammemsEntity);
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean unfollowDream(String userId, String dreamId) {
+        DreammemsEntity dreammemsEntity = dao.getDremMemByUserIdAndDrmId(Integer.parseInt(userId), Integer.parseInt(dreamId));
+        try {
+            dao.unfollowDream(dreammemsEntity);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

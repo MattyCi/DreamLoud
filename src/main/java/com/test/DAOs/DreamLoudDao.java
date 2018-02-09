@@ -1,9 +1,6 @@
 package com.test.DAOs;
 
-import com.test.Models.AccountEntity;
-import com.test.Models.DreamPostsEntity;
-import com.test.Models.DreamsEntity;
-import com.test.Models.PostCommentsEntity;
+import com.test.Models.*;
 
 import java.util.ArrayList;
 
@@ -40,4 +37,10 @@ public interface DreamLoudDao {
     void postComment(PostCommentsEntity comment);
 
     DreamsEntity getDreamById(Integer dreamId);
+
+    void followDream(DreammemsEntity dreammemsEntity) throws Exception;
+
+    DreammemsEntity getDremMemByUserIdAndDrmId(int acctId, int drmId);
+
+    void unfollowDream(DreammemsEntity dreammemsEntity) throws Exception;
 }

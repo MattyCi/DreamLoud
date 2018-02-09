@@ -108,6 +108,28 @@ public class HomeController {
         return "redirect:/newsfeed";
     }
 
+    @RequestMapping("/followDream")
+    public String followDream(Model model, @CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamId") String dreamId) {
+        boolean success = newsfeedHelper.followDream(userId, dreamId);
+        if (success){
+            model.addAttribute("followMessage", "You are now following this dream!");
+        } else {
+            model.addAttribute("followMessage", "You are already following this dream!");
+        }
+        return newsfeed(model, userId);
+    }
+
+    @RequestMapping("/unfollowDream")
+    public String unfollowDream(Model model, @CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamId") String dreamId) {
+        boolean success = newsfeedHelper.unfollowDream(userId, dreamId);
+        if (success){
+            model.addAttribute("followMessage", "You have unfollowed this dream!");
+        } else {
+            model.addAttribute("followMessage", "You are already not following this dream!");
+        }
+        return newsfeed(model, userId);
+    }
+
     @RequestMapping("/newsfeed-friends")
     public String newsfeedFriends() {
         return "newsfeed-friends";

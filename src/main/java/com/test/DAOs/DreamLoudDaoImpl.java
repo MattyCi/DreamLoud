@@ -1,9 +1,6 @@
 package com.test.DAOs;
 
-import com.test.Models.AccountEntity;
-import com.test.Models.DreamPostsEntity;
-import com.test.Models.DreamsEntity;
-import com.test.Models.PostCommentsEntity;
+import com.test.Models.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -126,5 +123,50 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         DreamsEntity dream = (DreamsEntity) session.createQuery("from DreamsEntity where drmId =" + dreamId).setMaxResults(1).uniqueResult();
         session.close();
         return dream;
+    }
+
+    public void followDream(DreammemsEntity dreammemsEntity) throws Exception {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(dreammemsEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } catch (Exception e){
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
+    public DreammemsEntity getDremMemByUserIdAndDrmId(int acctId, int drmId) {
+        Session session = factory.openSession();
+        DreammemsEntity dremMem = (DreammemsEntity) session.createQuery("from DreammemsEntity where acctId = " + acctId + " and drmId= " + drmId + "").setMaxResults(1).uniqueResult();
+        session.close();
+        return dremMem;
+    }
+
+    public void unfollowDream(DreammemsEntity dreammemsEntity) throws Exception {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.delete(dreammemsEntity);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } catch (Exception e){
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 }

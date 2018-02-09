@@ -7,11 +7,20 @@ public class TranslatedPosts {
     String userName;
     String postTitle;
     String DreamName;
+    String DreamId;
     String content;
     ArrayList<PostComments> comments;
     String postId;
     String userPic;
     String postDate;
+
+    public String getDreamId() {
+        return DreamId;
+    }
+
+    public void setDreamId(String dreamId) {
+        DreamId = dreamId;
+    }
 
     public String getPostDate() {
         return postDate;
