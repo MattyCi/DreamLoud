@@ -186,4 +186,36 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         }
         return dreammemsEntities;
     }
+
+    public ArrayList<DreamPostsEntity> getDreamPostsByDreamId(int drmId) {
+        ArrayList<DreamPostsEntity> dreamPostsEntities = new ArrayList<DreamPostsEntity>();
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            dreamPostsEntities = (ArrayList<DreamPostsEntity>) session.createQuery("FROM DreamPostsEntity where dreamId=" +drmId).list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return dreamPostsEntities;
+    }
+
+    public void createPost(DreamPostsEntity dreamPostsEntity) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(dreamPostsEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
 }

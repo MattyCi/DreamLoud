@@ -45,4 +45,8 @@ public interface DreamLoudDao {
     void unfollowDream(DreammemsEntity dreammemsEntity) throws Exception;
 
     ArrayList<DreammemsEntity> getDremMemByDrmId(int drmId);
+
+    ArrayList<DreamPostsEntity> getDreamPostsByDreamId(int drmId);
+
+    void createPost(DreamPostsEntity dreamPostsEntity);
 }

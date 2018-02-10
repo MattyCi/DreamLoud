@@ -3,12 +3,10 @@ package com.test.controller;
 import com.test.DAOs.DreamLoudDao;
 import com.test.DaoFactory.DaoFactory;
 import com.test.DaoFactory.DaoOptions;
+import com.test.Helpers.DreamHelper;
 import com.test.Helpers.LoginHelper;
 import com.test.Helpers.NewsfeedHelper;
-import com.test.Models.AccountEntity;
-import com.test.Models.DreamPostsEntity;
-import com.test.Models.PostCommentsEntity;
-import com.test.Models.TranslatedPosts;
+import com.test.Models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -23,8 +21,9 @@ import java.util.ArrayList;
 @Controller
 public class HomeController {
     private DreamLoudDao dao = DaoFactory.getInstance(DaoOptions.HIBERNATE_DAO);
-    LoginHelper loginHelper = new LoginHelper(dao);
-    NewsfeedHelper newsfeedHelper = new NewsfeedHelper(dao);
+    private LoginHelper loginHelper = new LoginHelper(dao);
+    private NewsfeedHelper newsfeedHelper = new NewsfeedHelper(dao);
+    private DreamHelper dreamHelper = new DreamHelper(dao);
 
     @RequestMapping("/")
     public ModelAndView helloWorld() {
@@ -47,6 +46,13 @@ public class HomeController {
             setCookie(response, "userId", String.valueOf(acct.getAcctId()));
             return "redirect:/newsfeed";
         }
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpServletResponse response)
+    {
+        removeCookie(response, "userId");
+        return "redirect:/index";
     }
 
     @RequestMapping("/contact")
@@ -96,6 +102,34 @@ public class HomeController {
             model.addAttribute("dreamPosts", posts);
             return "newsfeed";
         }
+    }
+
+    @RequestMapping("/dream")
+    public String dream(Model model, @CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamId") String dreamId) {
+        ArrayList<TranslatedPosts> posts;
+        DreamsEntity dream;
+        AccountEntity acct;
+        if(userId == null){
+            return "redirect:/index";
+        }else {
+            acct = loginHelper.getAcctUsingId(userId);
+            dream = dreamHelper.getDream(dreamId);
+            posts = dreamHelper.getRelatedDreamPosts(dreamId, userId);
+            model.addAttribute("acctInfo", acct);
+            model.addAttribute("dreamPosts", posts);
+            model.addAttribute("dreamInfo", dream);
+            if(acct == null) {
+                return "redirect:/index";
+            } else {
+                return "dream";
+            }
+        }
+    }
+
+    @RequestMapping("/createPost")
+    public String createPost(@RequestParam(required = false, name = "postContent") String postContent, @RequestParam(required = false, name = "dreamId") String dreamId, @RequestParam(required = false, name = "userId") String userId) {
+        dreamHelper.createPost(postContent, dreamId, userId);
+        return "redirect:/dream?dreamId=" +dreamId;
     }
 
     @RequestMapping("/postComment")
@@ -177,6 +211,13 @@ public class HomeController {
 
     private void setCookie(HttpServletResponse response, String cookieName, String userId) {
         Cookie userCookie = new Cookie(cookieName, userId);
+        userCookie.setMaxAge(48 * 60 * 60); //sets the cookie for 1 day
+        // demonstrates how we can manually add our own cookie value
+        response.addCookie(userCookie);
+    }
+
+    private void removeCookie(HttpServletResponse response, String cookieName) {
+        Cookie userCookie = new Cookie(cookieName, null);
         userCookie.setMaxAge(48 * 60 * 60); //sets the cookie for 1 day
         // demonstrates how we can manually add our own cookie value
         response.addCookie(userCookie);

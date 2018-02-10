@@ -9,7 +9,7 @@
     <meta name="description" content="This is social network html5 template available in themeforest......"/>
     <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page"/>
     <meta name="robots" content="index, follow"/>
-    <title>News Feed | Check what your friends are doing</title>
+    <title>Dream page</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
@@ -25,7 +25,6 @@
     <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
 </head>
 <body>
-<c:set var="userAcct" value="${acctInfo}"/>
 <div id="page-contents">
     <div class="container">
         <div class="row">
@@ -34,37 +33,54 @@
                 <a id="logolink" href="#"><img id="logo" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
                 <div class="sticky-sidebar">
                     <div class="profile-card">
-                        <img src="${userAcct.acctPic}" alt="user" class="profile-photo"/>
-                        <h5><a href="timeline" class="text-white-center">${userAcct.acctFname} ${userAcct.acctLname}</a>
+                        <img src="${acctInfo.acctPic}" alt="user" class="profile-photo"/>
+                        <h5><a href="timeline" class="text-white-center">${dreamInfo.drmName}</a>
                         </h5>
+
+                        <form:form action="/followDream" id="followForm">
+                            <input type="hidden" name="dreamId" value="${dreamInfo.drmId}"/>
+                        </form:form>
+                        <span class="text-dream-follow">
+                            <i class="ion-ios-cloud-outline"></i>
+                                <a onclick="document.getElementById('followForm').submit();">
+                                Follow
+                                </a>
+                        </span>
+                        <p>${dreamInfo.drmBio}</p>
                     </div>
                     <!--profile card ends-->
                     <div id="chat-block">
                         <div class="title">Dreamers</div>
                         <ul class="online-users list-inline">
-                            <li><a href="newsfeed-messages" title="Linda Lohan"><img src="resources/images/profiles/PF1.jpg"
-                                                                                     alt="user"
-                                                                                     class="img-responsive profile-photo"/><span
+                            <li><a href="newsfeed-messages" title="Linda Lohan"><img
+                                    src="resources/images/profiles/PF1.jpg"
+                                    alt="user"
+                                    class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="Sophia Lee"><img src="resources/images/profiles/PF2.png"
-                                                                                    alt="user"
-                                                                                    class="img-responsive profile-photo"/><span
+                            <li><a href="newsfeed-messages" title="Sophia Lee"><img
+                                    src="resources/images/profiles/PF2.png"
+                                    alt="user"
+                                    class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="John Doe"><img src="resources/images/profiles/PF3.jpeg"
-                                                                                  alt="user"
-                                                                                  class="img-responsive profile-photo"/><span
+                            <li><a href="newsfeed-messages" title="John Doe"><img
+                                    src="resources/images/profiles/PF3.jpeg"
+                                    alt="user"
+                                    class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="Alexis Clark"><img src="resources/images/profiles/PF4.jpeg"
-                                                                                      alt="user"
-                                                                                      class="img-responsive profile-photo"/><span
+                            <li><a href="newsfeed-messages" title="Alexis Clark"><img
+                                    src="resources/images/profiles/PF4.jpeg"
+                                    alt="user"
+                                    class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="James Carter"><img src="resources/images/profiles/PF5.jpg"
-                                                                                      alt="user"
-                                                                                      class="img-responsive profile-photo"/><span
+                            <li><a href="newsfeed-messages" title="James Carter"><img
+                                    src="resources/images/profiles/PF5.jpg"
+                                    alt="user"
+                                    class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="Robert Cook"><img src="resources/images/profiles/PF6.jpg"
-                                                                                     alt="user"
-                                                                                     class="img-responsive profile-photo"/><span
+                            <li><a href="newsfeed-messages" title="Robert Cook"><img
+                                    src="resources/images/profiles/PF6.jpg"
+                                    alt="user"
+                                    class="img-responsive profile-photo"/><span
                                     class="online-dot"></span></a></li>
                         </ul>
                     </div>
@@ -73,29 +89,33 @@
             </div>
             <div class="col-md-7">
 
-                <!-- Removing Post Create Box
-    <div class="create-post">
-        <div class="row">
-            <div class="col-md-7 col-sm-7">
-          <div class="form-group">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
-            <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-          </div>
-        </div>
-            <div class="col-md-5 col-sm-5">
-          <div class="tools">
-            <ul class="publishing-tools list-inline">
-              <li><a href="#"><i class="ion-compose"></i></a></li>
-              <li><a href="#"><i class="ion-images"></i></a></li>
-              <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-              <li><a href="#"><i class="ion-map"></i></a></li>
-            </ul>
-            <button class="btn btn-primary pull-right">Publish</button>
-          </div>
-        </div>
-        </div>
-    </div>
-                -->
+                <div class="create-post">
+                    <form:form action="/createPost">
+                    <input type="hidden" value="${acctInfo.acctId}" name="userId"/>
+                    <input type="hidden" value="${dreamInfo.drmId}" name="dreamId"/>
+                    <div class="row">
+                        <div class="col-md-7 col-sm-7">
+                            <div class="form-group">
+                                <img src="${acctInfo.acctPic}" alt="" class="profile-photo-md"/>
+                                <textarea name="postContent" id="exampleTextarea" cols="30" rows="1"
+                                          class="form-control" placeholder="Write what you wish"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <div class="tools">
+                                <ul class="publishing-tools list-inline">
+                                    <li><a href="#"><i class="ion-compose"></i></a></li>
+                                    <li><a href="#"><i class="ion-images"></i></a></li>
+                                    <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
+                                    <li><a href="#"><i class="ion-map"></i></a></li>
+                                </ul>
+                                <button type="submit" class="btn btn-primary pull-right">Publish</button>
+                            </div>
+                        </div>
+                        </form:form>
+                    </div>
+                </div>
+
 
                 <!-- Post Content -->
                 <!-- Start of Post -->
@@ -104,28 +124,15 @@
                         <div class="post-container" id="${post.postId}">
                             <div>
                                 <p id="followMessage">${followMessage}</p>
-                                    <form:form action="/dream" id="gotodream_${post.postId}">
-                                        <input type="hidden" name="dreamId" value="${post.dreamId}"/>
-                                    </form:form>
-									<span class="text-dream"><a onclick="document.getElementById('gotodream_${post.postId}').submit();" class="profile-link"><i
-                                            class="ion-code-working"></i> ${post.dreamName}</a>
+                                <span class="text-dream">
                                         <c:choose>
                                             <c:when test="${!post.followingDream}">
-                                                <form:form action="/followDream" id="followForm_${post.postId}">
-                                                    <input type="hidden" name="dreamId" value="${post.dreamId}"/>
-                                                </form:form>
-                                                    <span class="text-dream-follow">
-                                                        <i class="ion-ios-cloud-outline"></i>
-                                                            <a onclick="document.getElementById('followForm_${post.postId}').submit();">
-                                                            Follow
-                                                            </a>
-                                                    </span>
                                             </c:when>
                                             <c:otherwise>
                                                 <form:form action="/unfollowDream" id="followForm_${post.postId}">
                                                     <input type="hidden" name="dreamId" value="${post.dreamId}"/>
                                                 </form:form>
-                                                    <span class="text-dream-follow">
+                                                <span class="text-dream-follow">
                                                         <i class="ion-ios-cloud-outline"></i>
                                                             <a onclick="document.getElementById('followForm_${post.postId}').submit();">
                                                             Unfollow
@@ -141,19 +148,20 @@
                             <div class="post-detail">
                                 <div class="user-info">
                                     <h5><a href="timeline" class="profile-link">${post.userName}</a></h5>
-                                    <%--<p class="text-muted">January 12 at 2:15 p.m.</p>--%>
+                                        <%--<p class="text-muted">January 12 at 2:15 p.m.</p>--%>
                                     <p class="text-muted">${post.postDate}</p>
                                 </div>
                                 <div class="line-divider"></div>
                                 <div class="post-text">
                                     <p>${post.content}</p>
                                 </div>
-                                <c:forEach var="comment" items="${post.comments}" varStatus="status" >
+                                <c:forEach var="comment" items="${post.comments}" varStatus="status">
                                     <div class="line-divider"></div>
                                     <c:if test="${status.index == 0}">
                                         <div class="post-comment">
                                             <img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/>
-                                            <p><a href="timeline" class="profile-link">${comment.username}</a>: ${comment.content}</p>
+                                            <p><a href="timeline"
+                                                  class="profile-link">${comment.username}</a>: ${comment.content}</p>
                                         </div>
                                     </c:if>
                                     <c:if test="${status.index ==1}">
@@ -164,7 +172,8 @@
                                     </c:if>
                                     <div class="hide-comment">
                                         <img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/>
-                                        <p><a href="timeline" class="profile-link">${comment.username}</a>: ${comment.content}</p>
+                                        <p><a href="timeline"
+                                              class="profile-link">${comment.username}</a>: ${comment.content}</p>
                                     </div>
                                 </c:forEach>
                                 <div class="post-comment">
@@ -172,7 +181,8 @@
                                     <form:form action="/postComment">
                                         <input type="hidden" name="postId" value="${post.postId}">
                                         <input type="hidden" name="userId" value="${acctInfo.acctId}">
-                                        <input type="text" name="commentContent" class="form-control" placeholder="Post a comment">
+                                        <input type="text" name="commentContent" class="form-control"
+                                               placeholder="Post a comment">
                                     </form:form>
                                 </div>
                             </div>

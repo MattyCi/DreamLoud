@@ -18,7 +18,7 @@ public class NewsfeedHelper {
         return translatePosts(posts, userId);
     }
 
-    private ArrayList<TranslatedPosts> translatePosts(ArrayList<DreamPostsEntity> posts, String userId) {
+    public ArrayList<TranslatedPosts> translatePosts(ArrayList<DreamPostsEntity> posts, String userId) {
         ArrayList<TranslatedPosts> translatedPosts = new ArrayList<TranslatedPosts>();
         for (DreamPostsEntity post: posts) {
             TranslatedPosts translatedPost = new TranslatedPosts();
