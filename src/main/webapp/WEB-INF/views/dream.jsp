@@ -36,18 +36,34 @@
                         <img src="${acctInfo.acctPic}" alt="user" class="profile-photo"/>
                         <h5><a href="timeline" class="text-white-center">${dreamInfo.drmName}</a>
                         </h5>
+                        <p>${dreamInfo.drmBio}</p>
+                    </div>
 
-                        <form:form action="/followDream" id="followForm">
-                            <input type="hidden" name="dreamId" value="${dreamInfo.drmId}"/>
-                        </form:form>
-                        <span class="text-dream-follow">
+
+                    <c:choose>
+                        <c:when test="${dreamInfo.drmId == 1}">
+                            <form:form action="/followDream" id="followForm">
+                                <input type="hidden" name="dreamId" value="${dreamInfo.drmId}"/>
+                            </form:form>
+                            <span class="text-dream-follow">
                             <i class="ion-ios-cloud-outline"></i>
                                 <a onclick="document.getElementById('followForm').submit();">
                                 Follow
                                 </a>
                         </span>
-                        <p>${dreamInfo.drmBio}</p>
-                    </div>
+                        </c:when>
+                        <c:otherwise>
+                            <form:form action="/unfollowDream" id="followForm">
+                                <input type="hidden" name="dreamId" value="${dreamInfo.drmId}"/>
+                            </form:form>
+                            <span class="text-dream-follow">
+                                <i class="ion-ios-cloud-outline"></i>
+                                    <a onclick="document.getElementById('followForm').submit();">
+                                    Unfollow
+                                    </a>
+                            </span>
+                        </c:otherwise>
+                    </c:choose>
                     <!--profile card ends-->
                     <div id="chat-block">
                         <div class="title">Dreamers</div>

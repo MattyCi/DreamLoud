@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
@@ -105,16 +107,20 @@ public class HomeController {
     }
 
     @RequestMapping("/dream")
-    public String dream(Model model, @CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamId") String dreamId) {
+    public String dream(Model model, @CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamId") String dreamId, HttpServletResponse response, HttpServletRequest request) {
         ArrayList<TranslatedPosts> posts;
         DreamsEntity dream;
         AccountEntity acct;
+        if(dreamId == null){
+            dreamId = WebUtils.getCookie(request, "dreamId").getValue();
+        }
         if(userId == null){
             return "redirect:/index";
         }else {
             acct = loginHelper.getAcctUsingId(userId);
             dream = dreamHelper.getDream(dreamId);
             posts = dreamHelper.getRelatedDreamPosts(dreamId, userId);
+            setCookie(response, "dreamId", dreamId);
             model.addAttribute("acctInfo", acct);
             model.addAttribute("dreamPosts", posts);
             model.addAttribute("dreamInfo", dream);
@@ -129,7 +135,7 @@ public class HomeController {
     @RequestMapping("/createPost")
     public String createPost(@RequestParam(required = false, name = "postContent") String postContent, @RequestParam(required = false, name = "dreamId") String dreamId, @RequestParam(required = false, name = "userId") String userId) {
         dreamHelper.createPost(postContent, dreamId, userId);
-        return "redirect:/dream?dreamId=" +dreamId;
+        return "redirect:/dream";
     }
 
     @RequestMapping("/postComment")
