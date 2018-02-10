@@ -13,6 +13,15 @@ public class TranslatedPosts {
     String postId;
     String userPic;
     String postDate;
+    boolean isFollowingDream;
+
+    public boolean isFollowingDream() {
+        return isFollowingDream;
+    }
+
+    public void setFollowingDream(boolean followingDream) {
+        isFollowingDream = followingDream;
+    }
 
     public String getDreamId() {
         return DreamId;

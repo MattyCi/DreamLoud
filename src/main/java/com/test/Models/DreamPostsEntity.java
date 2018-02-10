@@ -1,6 +1,7 @@
 package com.test.Models;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Arrays;
 
 @Entity
@@ -12,7 +13,15 @@ public class DreamPostsEntity {
     private byte[] postPic;
     private Integer acctId;
     private Integer dreamId;
+    private Timestamp datePosted;
 
+    public Timestamp getDatePosted() {
+        return datePosted;
+    }
+
+    public void setDatePosted(Timestamp datePosted) {
+        this.datePosted = datePosted;
+    }
 
 
     @Basic

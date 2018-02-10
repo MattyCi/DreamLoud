@@ -23,5 +23,8 @@
         <property name="dreamId">
             <column name="DRM_ID" sql-type="int(11)" not-null="true"/>
         </property>
+        <property name="datePosted">
+            <column name="TIME_POSTED" sql-type="datetime" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

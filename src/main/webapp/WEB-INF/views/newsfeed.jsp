@@ -106,15 +106,30 @@
                                 <p id="followMessage">${followMessage}</p>
 									<span class="text-dream"><a href="timeline" class="profile-link"><i
                                             class="ion-code-working"></i> ${post.dreamName}</a>
-                                        <form:form action="/followDream" id="followForm_${post.postId}">
-                                            <input type="hidden" name="dreamId" value="${post.dreamId}"/>
-                                            <span class="text-dream-follow">
-                                                <i class="ion-ios-cloud-outline"></i>
-                                                    <a onclick="document.getElementById('followForm_${post.postId}').submit();">
-                                                    Follow
-                                                    </a>
-                                            </span>
-                                        </form:form>
+                                        <c:choose>
+                                            <c:when test="${!post.followingDream}">
+                                                <form:form action="/followDream" id="followForm_${post.postId}">
+                                                    <input type="hidden" name="dreamId" value="${post.dreamId}"/>
+                                                </form:form>
+                                                    <span class="text-dream-follow">
+                                                        <i class="ion-ios-cloud-outline"></i>
+                                                            <a onclick="document.getElementById('followForm_${post.postId}').submit();">
+                                                            Follow
+                                                            </a>
+                                                    </span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <form:form action="/unfollowDream" id="followForm_${post.postId}">
+                                                    <input type="hidden" name="dreamId" value="${post.dreamId}"/>
+                                                </form:form>
+                                                    <span class="text-dream-follow">
+                                                        <i class="ion-ios-cloud-outline"></i>
+                                                            <a onclick="document.getElementById('followForm_${post.postId}').submit();">
+                                                            Unfollow
+                                                            </a>
+                                                    </span>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </span>
                                 <p class="text-muted-small">52 Dreamers</p>
                                 <div class="line-divider-half"></div>
@@ -123,7 +138,8 @@
                             <div class="post-detail">
                                 <div class="user-info">
                                     <h5><a href="timeline" class="profile-link">${post.userName}</a></h5>
-                                    <p class="text-muted">January 12 at 2:15 p.m.</p>
+                                    <%--<p class="text-muted">January 12 at 2:15 p.m.</p>--%>
+                                    <p class="text-muted">${post.postDate}</p>
                                 </div>
                                 <div class="line-divider"></div>
                                 <div class="post-text">

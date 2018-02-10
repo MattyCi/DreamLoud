@@ -3,6 +3,8 @@ package com.test.Helpers;
 import com.test.DAOs.DreamLoudDao;
 import com.test.Models.*;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class NewsfeedHelper {
@@ -13,10 +15,10 @@ public class NewsfeedHelper {
 
     public ArrayList<TranslatedPosts> getRelatedDreamPosts(String userId){
         ArrayList<DreamPostsEntity> posts = dao.getDreamPosts(userId);
-        return translatePosts(posts);
+        return translatePosts(posts, userId);
     }
 
-    private ArrayList<TranslatedPosts> translatePosts(ArrayList<DreamPostsEntity> posts) {
+    private ArrayList<TranslatedPosts> translatePosts(ArrayList<DreamPostsEntity> posts, String userId) {
         ArrayList<TranslatedPosts> translatedPosts = new ArrayList<TranslatedPosts>();
         for (DreamPostsEntity post: posts) {
             TranslatedPosts translatedPost = new TranslatedPosts();
@@ -31,6 +33,8 @@ public class NewsfeedHelper {
             translatedPost.setPostId(String.valueOf(post.getDreamPostId()));
             translatedPost.setDreamName(dream.getDrmName());
             translatedPost.setDreamId(String.valueOf(dream.getDrmId()));
+            translatedPost.setFollowingDream(isFollowingDream(userId, String.valueOf(dream.getDrmId())));
+            translatedPost.setPostDate(getPostDateFormatted(post));
             translatedPosts.add(translatedPost);
         }
         return translatedPosts;
@@ -80,5 +84,16 @@ public class NewsfeedHelper {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private String getPostDateFormatted(DreamPostsEntity dreamPostsEntity){
+        Timestamp timeStamp = dreamPostsEntity.getDatePosted();
+        SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d 'at' h:mm aaa");
+        return format.format(timeStamp);
+    }
+
+    private boolean isFollowingDream(String userId, String dreamId){
+        DreammemsEntity dreammemsEntity = dao.getDremMemByUserIdAndDrmId(Integer.parseInt(userId), Integer.parseInt(dreamId));
+        return dreammemsEntity != null;
     }
 }
