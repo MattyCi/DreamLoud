@@ -35,6 +35,7 @@ public class NewsfeedHelper {
             translatedPost.setDreamId(String.valueOf(dream.getDrmId()));
             translatedPost.setFollowingDream(isFollowingDream(userId, String.valueOf(dream.getDrmId())));
             translatedPost.setPostDate(getPostDateFormatted(post));
+            translatedPost.setNumberOfFollowers(getNumOfFollwers(dream));
             translatedPosts.add(translatedPost);
         }
         return translatedPosts;
@@ -96,4 +97,10 @@ public class NewsfeedHelper {
         DreammemsEntity dreammemsEntity = dao.getDremMemByUserIdAndDrmId(Integer.parseInt(userId), Integer.parseInt(dreamId));
         return dreammemsEntity != null;
     }
+
+    private String getNumOfFollwers(DreamsEntity dreamsEntity){
+        ArrayList<DreammemsEntity> dreammemsEntities = dao.getDremMemByDrmId(dreamsEntity.getDrmId());
+        return String.valueOf(dreammemsEntities.size());
+    }
+
 }

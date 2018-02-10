@@ -131,7 +131,7 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </span>
-                                <p class="text-muted-small">52 Dreamers</p>
+                                <p class="text-muted-small">${post.numberOfFollowers} Dreamers</p>
                                 <div class="line-divider-half"></div>
                             </div>
                             <img src="${post.userPic}" alt="user" class="profile-photo-md pull-left"/>

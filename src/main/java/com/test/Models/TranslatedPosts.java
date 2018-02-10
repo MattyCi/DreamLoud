@@ -4,16 +4,25 @@ import java.util.ArrayList;
 
 public class TranslatedPosts {
 
-    String userName;
-    String postTitle;
-    String DreamName;
-    String DreamId;
-    String content;
-    ArrayList<PostComments> comments;
-    String postId;
-    String userPic;
-    String postDate;
-    boolean isFollowingDream;
+    private String userName;
+    private String postTitle;
+    private String DreamName;
+    private String DreamId;
+    private String content;
+    private ArrayList<PostComments> comments;
+    private String postId;
+    private String userPic;
+    private String postDate;
+    private String numberOfFollowers;
+    private boolean isFollowingDream;
+
+    public String getNumberOfFollowers() {
+        return numberOfFollowers;
+    }
+
+    public void setNumberOfFollowers(String numberOfFollowers) {
+        this.numberOfFollowers = numberOfFollowers;
+    }
 
     public boolean isFollowingDream() {
         return isFollowingDream;

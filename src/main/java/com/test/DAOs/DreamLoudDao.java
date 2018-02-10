@@ -43,4 +43,6 @@ public interface DreamLoudDao {
     DreammemsEntity getDremMemByUserIdAndDrmId(int acctId, int drmId);
 
     void unfollowDream(DreammemsEntity dreammemsEntity) throws Exception;
+
+    ArrayList<DreammemsEntity> getDremMemByDrmId(int drmId);
 }

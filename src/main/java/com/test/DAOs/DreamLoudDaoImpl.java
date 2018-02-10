@@ -169,4 +169,21 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
             session.close();
         }
     }
+
+    public ArrayList<DreammemsEntity> getDremMemByDrmId(int drmId) {
+        ArrayList<DreammemsEntity> dreammemsEntities = new ArrayList<DreammemsEntity>();
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            dreammemsEntities = (ArrayList<DreammemsEntity>) session.createQuery("FROM DreammemsEntity where drmId=" +drmId).list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return dreammemsEntities;
+    }
 }
