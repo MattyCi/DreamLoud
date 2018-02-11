@@ -163,19 +163,21 @@ public class HomeController {
     }
 
     @RequestMapping("/createPost")
-    public String createPost(@RequestParam(required = false, name = "postContent") String postContent, @RequestParam(required = false, name = "dreamId") String dreamId, @RequestParam(required = false, name = "userId") String userId) {
+    public String createPost(@RequestParam(required = false, name = "postContent") String postContent, @RequestParam(required = false, name = "dreamId") String dreamId, @RequestParam(required = false, name = "userId") String userId, HttpServletRequest request) {
         dreamHelper.createPost(postContent, dreamId, userId);
-        return "redirect:/dream";
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
     }
 
     @RequestMapping("/postComment")
-    public String postComment(@RequestParam(required = false, name = "commentContent") String commentContent, @RequestParam(required = false, name = "userId") String userId, @RequestParam(required = false, name = "postId") String postId) {
+    public String postComment(@RequestParam(required = false, name = "commentContent") String commentContent, @RequestParam(required = false, name = "userId") String userId, @RequestParam(required = false, name = "postId") String postId, HttpServletRequest request) {
         PostCommentsEntity comment = new PostCommentsEntity();
         comment.setCommentContent(commentContent.getBytes());
         comment.setAcctId(Integer.parseInt(userId));
         comment.setPostId(Integer.parseInt(postId));
         newsfeedHelper.postComment(comment);
-        return "redirect:/newsfeed";
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
     }
 
     @RequestMapping("/followDream")

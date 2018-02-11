@@ -23,6 +23,7 @@
 
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
+
 </head>
 <body>
 <c:set var="userAcct" value="${acctInfo}"/>
@@ -73,30 +74,6 @@
             </div>
             <div class="col-md-7">
 
-                <!-- Removing Post Create Box
-    <div class="create-post">
-        <div class="row">
-            <div class="col-md-7 col-sm-7">
-          <div class="form-group">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
-            <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-          </div>
-        </div>
-            <div class="col-md-5 col-sm-5">
-          <div class="tools">
-            <ul class="publishing-tools list-inline">
-              <li><a href="#"><i class="ion-compose"></i></a></li>
-              <li><a href="#"><i class="ion-images"></i></a></li>
-              <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-              <li><a href="#"><i class="ion-map"></i></a></li>
-            </ul>
-            <button class="btn btn-primary pull-right">Publish</button>
-          </div>
-        </div>
-        </div>
-    </div>
-                -->
-
                 <!-- Post Content -->
                 <!-- Start of Post -->
                 <c:forEach var="post" items="${dreamPosts}">
@@ -104,30 +81,21 @@
                         <div class="post-container" id="${post.postId}">
                             <div>
                                 <p id="followMessage">${followMessage}</p>
-                                    <form:form action="/dream" id="gotodream_${post.postId}">
-                                        <input type="hidden" name="dreamId" value="${post.dreamId}"/>
-                                    </form:form>
-									<span class="text-dream"><a onclick="document.getElementById('gotodream_${post.postId}').submit();" class="profile-link"><i
+									<span class="text-dream"><a href="/dream?dreamId=${post.dreamId}" class="profile-link"><i
                                             class="ion-code-working"></i> ${post.dreamName}</a>
                                         <c:choose>
                                             <c:when test="${!post.followingDream}">
-                                                <form:form action="/followDream" id="followForm_${post.postId}">
-                                                    <input type="hidden" name="dreamId" value="${post.dreamId}"/>
-                                                </form:form>
                                                     <span class="text-dream-follow">
                                                         <i class="ion-ios-cloud-outline"></i>
-                                                            <a onclick="document.getElementById('followForm_${post.postId}').submit();">
+                                                            <a href="/followDream?dreamId=${post.dreamId}">
                                                             Follow
                                                             </a>
                                                     </span>
                                             </c:when>
                                             <c:otherwise>
-                                                <form:form action="/unfollowDream" id="followForm_${post.postId}">
-                                                    <input type="hidden" name="dreamId" value="${post.dreamId}"/>
-                                                </form:form>
                                                     <span class="text-dream-follow">
                                                         <i class="ion-ios-cloud-outline"></i>
-                                                            <a onclick="document.getElementById('followForm_${post.postId}').submit();">
+                                                            <a href="/unfollowDream?dreamId=${post.dreamId}">
                                                             Unfollow
                                                             </a>
                                                     </span>
