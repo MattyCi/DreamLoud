@@ -20,9 +20,9 @@ public interface DreamLoudDao {
     void updateAccount(AccountEntity accountEntity);
 
 
-    void deleteAccount(String acctId);
+    void deleteAccount(AccountEntity acct);
 
-    void deleteDream(String dreamId);
+    void deleteDream(DreamsEntity dream);
 
     void deleteDreamChat(String dreamChatId);
 
@@ -49,4 +49,10 @@ public interface DreamLoudDao {
     ArrayList<DreamPostsEntity> getDreamPostsByDreamId(int drmId);
 
     void createPost(DreamPostsEntity dreamPostsEntity);
+
+    void addDream(DreamsEntity dreamsEntity);
+
+    AccountEntity getAccountByEmail(String userEmail);
+
+    DreamsEntity getDreamByName(String dreamName);
 }

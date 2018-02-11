@@ -37,4 +37,18 @@ public class DreamHelper {
         dreamPostsEntity.setPostContent(postContent.getBytes());
         dao.createPost(dreamPostsEntity);
     }
+
+    public void addDream(String dreamName, String dreamBio) {
+        DreamsEntity dreamsEntity = new DreamsEntity();
+        dreamsEntity.setDrmBio(dreamBio);
+        dreamsEntity.setDrmName(dreamName);
+        dao.addDream(dreamsEntity);
+    }
+
+    public void removeDream(String dreamName) {
+        DreamsEntity dreamsEntity = dao.getDreamByName(dreamName);
+        if(dreamsEntity != null){
+            dao.deleteDream(dreamsEntity);
+        }
+    }
 }

@@ -3,6 +3,7 @@ package com.test.controller;
 import com.test.DAOs.DreamLoudDao;
 import com.test.DaoFactory.DaoFactory;
 import com.test.DaoFactory.DaoOptions;
+import com.test.Helpers.AccountHelper;
 import com.test.Helpers.DreamHelper;
 import com.test.Helpers.LoginHelper;
 import com.test.Helpers.NewsfeedHelper;
@@ -26,11 +27,11 @@ public class HomeController {
     private LoginHelper loginHelper = new LoginHelper(dao);
     private NewsfeedHelper newsfeedHelper = new NewsfeedHelper(dao);
     private DreamHelper dreamHelper = new DreamHelper(dao);
+    private AccountHelper accountHelper = new AccountHelper(dao);
 
     @RequestMapping("/")
-    public ModelAndView helloWorld() {
-        return new
-                ModelAndView("index", "message", "Welcome to GC COFFEE");
+    public String initialPage() {
+        return "index";
     }
 
     @RequestMapping("/index")
@@ -90,6 +91,35 @@ public class HomeController {
     @RequestMapping("/index-register")
     public String indexRegister() {
         return "index-register";
+    }
+
+    @RequestMapping("/admin-console")
+    public String adminConsole() {
+        return "admin-console";
+    }
+
+    @RequestMapping("/addUser")
+    public String addUser(@RequestParam("userFirstName") String firstName, @RequestParam("userLastName") String lastName, @RequestParam("userEmail") String userEmail, @RequestParam("userPic") String userPic, @RequestParam("userPass") String userPass, @RequestParam("userBio") String userBio) {
+        accountHelper.addUser(firstName,lastName,userEmail,userPic,userPass,userBio);
+        return "admin-console";
+    }
+
+    @RequestMapping("/addDream")
+    public String addDream(@RequestParam("dreamName") String dreamName, @RequestParam("dreamBio")String dreamBio) {
+        dreamHelper.addDream(dreamName, dreamBio);
+        return "admin-console";
+    }
+
+    @RequestMapping("/removeUser")
+    public String removeUser(@RequestParam("userFirstName") String firstName, @RequestParam("userLastName") String lastName, @RequestParam("userEmail") String userEmail) {
+        accountHelper.removeUser(userEmail);
+        return "admin-console";
+    }
+
+    @RequestMapping("/removeDream")
+    public String removeDream(@RequestParam("dreamName") String dreamName) {
+        dreamHelper.removeDream(dreamName);
+        return "admin-console";
     }
 
     @RequestMapping("/newsfeed")

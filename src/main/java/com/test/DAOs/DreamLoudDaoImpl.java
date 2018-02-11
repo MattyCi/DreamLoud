@@ -35,7 +35,18 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
     }
 
     public void addAccount(AccountEntity accountEntity) {
-
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(accountEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
 
@@ -45,12 +56,34 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
 
 
 
-    public void deleteAccount(String acctId) {
-
+    public void deleteAccount(AccountEntity acct) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(acct);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
-    public void deleteDream(String dreamId) {
-
+    public void deleteDream(DreamsEntity dream) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(dream);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public void deleteDreamChat(String dreamChatId) {
@@ -217,5 +250,34 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         } finally {
             session.close();
         }
+    }
+
+    public void addDream(DreamsEntity dreamsEntity) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(dreamsEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    public AccountEntity getAccountByEmail(String userEmail) {
+        Session session = factory.openSession();
+        AccountEntity acct = (AccountEntity) session.createQuery("from AccountEntity where acctEmail = '" + userEmail + "'").setMaxResults(1).uniqueResult();
+        session.close();
+        return acct;
+    }
+
+    public DreamsEntity getDreamByName(String dreamName) {
+        Session session = factory.openSession();
+        DreamsEntity dream = (DreamsEntity) session.createQuery("from DreamsEntity where drmName = '" + dreamName + "'").setMaxResults(1).uniqueResult();
+        session.close();
+        return dream;
     }
 }
