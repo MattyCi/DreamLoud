@@ -132,7 +132,7 @@ public class HomeController {
             posts = newsfeedHelper.getRelatedDreamPosts(userId);
             model.addAttribute("acctInfo", acct);
             model.addAttribute("dreamPosts", posts);
-            return "newsfeed";
+            return "news";
         }
     }
 

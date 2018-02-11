@@ -15,6 +15,8 @@ public class DreamPostsEntity {
     private Integer dreamId;
     private Timestamp datePosted;
 
+    @Basic
+    @Column(name = "TIME_POSTED", nullable = false)
     public Timestamp getDatePosted() {
         return datePosted;
     }

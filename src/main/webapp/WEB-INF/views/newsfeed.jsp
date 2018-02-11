@@ -26,7 +26,6 @@
 
 </head>
 <body>
-<c:set var="userAcct" value="${acctInfo}"/>
 <div id="page-contents">
     <div class="container">
         <div class="row">
