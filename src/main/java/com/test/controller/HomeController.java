@@ -63,6 +63,11 @@ public class HomeController {
         return "contact";
     }
 
+    @RequestMapping("/my-profile")
+    public String myProfile() {
+        return "my-profile";
+    }
+
     @RequestMapping("/edit-profile-basic")
     public String editProfileBasic() {
         return "edit-profile-basic";
