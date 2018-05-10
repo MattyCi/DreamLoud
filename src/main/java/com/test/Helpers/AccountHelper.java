@@ -2,6 +2,9 @@ package com.test.Helpers;
 
 import com.test.DAOs.DreamLoudDao;
 import com.test.Models.AccountEntity;
+import com.test.Models.DreamersEntity;
+
+import java.util.ArrayList;
 
 /**
  * Created by Aaron on 2/11/2018.
@@ -29,5 +32,23 @@ public class AccountHelper {
         if (accountEntity != null) {
             dao.deleteAccount(accountEntity);
         }
+    }
+
+    public static void addFriend(String userId, String dreamerId) {
+
+    }
+
+    public ArrayList<AccountEntity> getFriends(String userId) {
+        return null;
+    }
+
+    public ArrayList<AccountEntity> getTopFriends(String userId) {
+        ArrayList<DreamersEntity> dreamers = dao.getDreamers(Integer.parseInt(userId));
+        ArrayList<Integer> dreamerIds = new ArrayList<Integer>();
+        for(DreamersEntity dreamer : dreamers){
+            dreamerIds.add(dreamer.getAcctId2());
+            System.out.print(dreamer.getAcctId2());
+        }
+        return dao.getAccountsByIds(dreamerIds);
     }
 }

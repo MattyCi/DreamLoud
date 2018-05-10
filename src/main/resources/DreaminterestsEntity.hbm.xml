@@ -4,9 +4,9 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.test.Models.MeminterestsEntity" table="meminterests" schema="dreamloudPROD">
-        <id name="intrAcctId">
-            <column name="INTR_ACCT_ID" sql-type="int(11)"/>
+    <class name="com.test.Models.DreaminterestsEntity" table="dreaminterests" schema="dreamloudPROD">
+        <id name="drmIntrId">
+            <column name="DRM_INTR_ID" sql-type="int(11)"/>
         </id>
     </class>
 </hibernate-mapping>

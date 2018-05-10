@@ -5,13 +5,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 
 /**
  * Created by Aaron on 11/28/2017.
  */
-public class DreamLoudDaoImpl implements DreamLoudDao{
+public class DreamLoudDaoImpl implements DreamLoudDao {
     private static SessionFactory factory;
 
     public DreamLoudDaoImpl(SessionFactory factory) {
@@ -34,6 +35,23 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         return null;
     }
 
+    public ArrayList<DreamersEntity> getDreamers(Integer userId) {
+        ArrayList<DreamersEntity> dreamers = new ArrayList<DreamersEntity>();
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            dreamers = (ArrayList<DreamersEntity>) session.createQuery("FROM DreamersEntity where acctId=" + userId).list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return dreamers;
+    }
+
     public void addAccount(AccountEntity accountEntity) {
         Session session = factory.openSession();
         Transaction transaction = null;
@@ -41,7 +59,7 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
             transaction = session.beginTransaction();
             session.save(accountEntity);
             transaction.commit();
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         } finally {
@@ -53,7 +71,6 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
     public void updateAccount(AccountEntity accountEntity) {
 
     }
-
 
 
     public void deleteAccount(AccountEntity acct) {
@@ -103,14 +120,25 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
 
     public ArrayList<DreamPostsEntity> getDreamPosts(String userId) {
         ArrayList<DreamPostsEntity> posts = new ArrayList<DreamPostsEntity>();
+        ArrayList<DreammemsEntity> dreamsUserFollows;
+        ArrayList<Integer> dreamIds = new ArrayList<Integer>();
         Session session = factory.openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            posts = (ArrayList<DreamPostsEntity>) session.createQuery("FROM DreamPostsEntity").list();
+            dreamsUserFollows = (ArrayList<DreammemsEntity>) session.createQuery("FROM DreammemsEntity where acctId = " + userId).list();
+            for (DreammemsEntity dreamMems : dreamsUserFollows) {
+                dreamIds.add(dreamMems.getDrmId());
+            }
+            Query query = session.createQuery("FROM DreamPostsEntity where dreamId in :ids");
+            query.setParameterList("ids", dreamIds);
+            posts = (ArrayList<DreamPostsEntity>) query.list();
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } catch (Exception e) {
+            posts = (ArrayList<DreamPostsEntity>) session.createQuery("FROM DreamPostsEntity").list();
             e.printStackTrace();
         } finally {
             session.close();
@@ -124,7 +152,7 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            comments = (ArrayList<PostCommentsEntity>) session.createQuery("FROM PostCommentsEntity where postId=" +postId).list();
+            comments = (ArrayList<PostCommentsEntity>) session.createQuery("FROM PostCommentsEntity where postId=" + postId).list();
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
@@ -143,7 +171,7 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
             transaction = session.beginTransaction();
             session.save(comment);
             transaction.commit();
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         } finally {
@@ -165,10 +193,10 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
             transaction = session.beginTransaction();
             session.save(dreammemsEntity);
             transaction.commit();
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
-        } catch (Exception e){
+        } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
             throw e;
@@ -194,7 +222,7 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
-        } catch (Exception e){
+        } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
             throw e;
@@ -209,7 +237,7 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            dreammemsEntities = (ArrayList<DreammemsEntity>) session.createQuery("FROM DreammemsEntity where drmId=" +drmId).list();
+            dreammemsEntities = (ArrayList<DreammemsEntity>) session.createQuery("FROM DreammemsEntity where drmId=" + drmId).list();
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
@@ -226,7 +254,7 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            dreamPostsEntities = (ArrayList<DreamPostsEntity>) session.createQuery("FROM DreamPostsEntity where dreamId=" +drmId).list();
+            dreamPostsEntities = (ArrayList<DreamPostsEntity>) session.createQuery("FROM DreamPostsEntity where dreamId=" + drmId).list();
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
@@ -244,7 +272,7 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
             transaction = session.beginTransaction();
             session.save(dreamPostsEntity);
             transaction.commit();
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         } finally {
@@ -259,7 +287,7 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
             transaction = session.beginTransaction();
             session.save(dreamsEntity);
             transaction.commit();
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         } finally {
@@ -279,5 +307,28 @@ public class DreamLoudDaoImpl implements DreamLoudDao{
         DreamsEntity dream = (DreamsEntity) session.createQuery("from DreamsEntity where drmName = '" + dreamName + "'").setMaxResults(1).uniqueResult();
         session.close();
         return dream;
+    }
+
+    public ArrayList<AccountEntity> getAccountsByIds(ArrayList<Integer> dreamerIds) {
+        ArrayList<AccountEntity> dreamerAccts = null;
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM AccountEntity where acctId in :ids");
+            query.setParameterList("ids", dreamerIds);
+            dreamerAccts = (ArrayList<AccountEntity>) query.list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+        return dreamerAccts;
     }
 }

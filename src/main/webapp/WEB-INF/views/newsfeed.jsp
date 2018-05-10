@@ -35,17 +35,22 @@
                 <div class="sticky-sidebar">
                     <div class="profile-card">
                         <img src="${userAcct.acctPic}" alt="user" class="profile-photo"/>
-                        <h5><a href="timeline" class="text-white-center">${userAcct.acctFname} ${userAcct.acctLname}</a>
+                        <h5>
+                            <a href="timeline" class="text-white-center">${userAcct.acctFname} ${userAcct.acctLname}</a>
                         </h5>
                     </div>
                     <!--profile card ends-->
                     <div id="chat-block">
                         <div class="title">Dreamers</div>
                         <ul class="online-users list-inline">
-                            <li><a href="newsfeed-messages" title="Linda Lohan"><img src="resources/images/profiles/PF1.jpg"
-                                                                                     alt="user"
-                                                                                     class="img-responsive profile-photo"/><span
-                                    class="online-dot"></span></a></li>
+                            <c:forEach var="friend" items="${topFriends}">
+                                <li>
+                                    <a href="newsfeed-messages" title="Linda Lohan">
+                                        <img src="resources/images/profiles/PF1.jpg" alt="user" class="img-responsive profile-photo"/>
+                                        <span class="online-dot"></span>
+                                    </a>
+                                </li>
+                            </c:forEach>
                             <li><a href="newsfeed-messages" title="Sophia Lee"><img src="resources/images/profiles/PF2.png"
                                                                                     alt="user"
                                                                                     class="img-responsive profile-photo"/><span

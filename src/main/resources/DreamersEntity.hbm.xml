@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.test.Models.DreamersEntity" table="dreamers" schema="dreamloudPROD">
+        <id name="acctAcctId">
+            <column name="ACCT_ACCT_ID" sql-type="int(11)"/>
+        </id>
+        <property name="acctId">
+            <column name="ACCT_ID" sql-type="int(11)"/>
+        </property>
+        <property name="acctId2">
+            <column name="ACCT_ID_2" sql-type="int(11)"/>
+        </property>
+        <property name="drmrReqDatetime">
+            <column name="DRMR_REQ_DATETIME" sql-type="datetime"/>
+        </property>
+    </class>
+</hibernate-mapping>

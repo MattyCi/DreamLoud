@@ -12,7 +12,7 @@ public interface DreamLoudDao {
     AccountEntity getAccountById(String acctId);
 
     ArrayList<AccountEntity> getAccountsInDream(String dreamId);
-
+    ArrayList<DreamersEntity> getDreamers(Integer userId);
 
     void addAccount(AccountEntity accountEntity);
 
@@ -55,4 +55,6 @@ public interface DreamLoudDao {
     AccountEntity getAccountByEmail(String userEmail);
 
     DreamsEntity getDreamByName(String dreamName);
+
+    ArrayList<AccountEntity> getAccountsByIds(ArrayList<Integer> dreamerIds);
 }

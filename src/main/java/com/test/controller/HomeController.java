@@ -130,13 +130,16 @@ public class HomeController {
     @RequestMapping("/newsfeed")
     public String newsfeed(Model model, @CookieValue(required = false, name = "userId") String userId) {
         AccountEntity acct = loginHelper.getAcctUsingId(userId);
+        ArrayList<AccountEntity> friends;
         ArrayList<TranslatedPosts> posts;
         if(acct == null){
             return "redirect:/index";
         }else {
             posts = newsfeedHelper.getRelatedDreamPosts(userId);
+            friends = accountHelper.getTopFriends(userId);
             model.addAttribute("acctInfo", acct);
             model.addAttribute("dreamPosts", posts);
+            model.addAttribute("topFriends", friends);
             return "news";
         }
     }
@@ -205,6 +208,11 @@ public class HomeController {
             model.addAttribute("followMessage", "You are already not following this dream!");
         }
         return newsfeed(model, userId);
+    }
+
+    @RequestMapping("/addFriend")
+    public void addFriend(@CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamerId") String dreamerId) {
+        AccountHelper.addFriend(userId, dreamerId);
     }
 
     @RequestMapping("/newsfeed-friends")

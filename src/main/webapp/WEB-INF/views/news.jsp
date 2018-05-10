@@ -63,18 +63,26 @@
                 <a id="logolink" href="#"><img id="logo" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
                 <div class="sticky-sidebar">
                     <div class="profile-card">
-                        <img src="http://placehold.it/300x300" alt="user" class="profile-photo" />
-                        <h5><a href="timeline" class="text-white-center">Sarah Cruiz</a></h5>
+                        <img src="${acctInfo.acctPic}" alt="user" class="profile-photo"/>
+                        <h5>
+                            <a href="timeline" class="text-white-center">${acctInfo.acctFname} ${acctInfo.acctLname}</a>
+                        </h5>
                     </div>
                     <div id="chat-block">
                         <div class="title">Dreamers</div>
                         <ul class="online-users list-inline">
-                            <li><a href="newsfeed-messages" title="Linda Lohan"><img src="resources/images/profiles/PF1.jpg" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="Sophia Lee"><img src="resources/images/profiles/PF2.png" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="John Doe"><img src="resources/images/profiles/PF3.jpeg" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="Alexis Clark"><img src="resources/images/profiles/PF4.jpeg" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="James Carter"><img src="resources/images/profiles/PF5.jpg" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                            <li><a href="newsfeed-messages" title="Robert Cook"><img src="resources/images/profiles/PF6.jpg" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                            <c:forEach var="friend" items="${topFriends}">
+                                <li>
+                                    <a href="newsfeed-messages" title="${friend.acctFname} ${friend.acctLname}"><img src="${friend.acctPic}" alt="user" class="img-responsive profile-photo" />
+                                        <span class="online-dot"></span>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                            <%--<li><a href="newsfeed-messages" title="Sophia Lee"><img src="resources/images/profiles/PF2.png" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>--%>
+                            <%--<li><a href="newsfeed-messages" title="John Doe"><img src="resources/images/profiles/PF3.jpeg" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>--%>
+                            <%--<li><a href="newsfeed-messages" title="Alexis Clark"><img src="resources/images/profiles/PF4.jpeg" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>--%>
+                            <%--<li><a href="newsfeed-messages" title="James Carter"><img src="resources/images/profiles/PF5.jpg" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>--%>
+                            <%--<li><a href="newsfeed-messages" title="Robert Cook"><img src="resources/images/profiles/PF6.jpg" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>--%>
                         </ul>
                     </div>
                 </div>
