@@ -64,7 +64,9 @@ public class HomeController {
     }
 
     @RequestMapping("/my-profile")
-    public String myProfile() {
+    public String myProfile(Model model, @CookieValue(required = false, name = "userId") String userId) {
+        AccountEntity acct = loginHelper.getAcctUsingId(userId);
+        model.addAttribute("acctInfo", acct);
         return "my-profile";
     }
 

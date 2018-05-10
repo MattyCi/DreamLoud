@@ -38,7 +38,7 @@
     <div id="page-contents">
         <div class="row row-eq-height hidden-md hidden-lg">
             <div class="col-sm-4 " id="logo-div">
-                <a href="#"><img id="logo" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
+                <a href="#"><img id="logo1" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
             </div>
             <div class="col-xs-6 col-sm-4 profile-card">
                 <img src="${userAcct.acctPic}" alt="user" class="profile-photo"/>
@@ -60,12 +60,12 @@
         </div>
         <div class="row">
             <div class="hidden-xs hidden-sm col-md-3 static">
-                <a id="logolink" href="#"><img id="logo" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
+                <a id="logolink" href="#"><img id="logo2" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
                 <div class="sticky-sidebar">
                     <div class="profile-card">
                         <img src="${acctInfo.acctPic}" alt="user" class="profile-photo"/>
                         <h5>
-                            <a href="timeline" class="text-white-center">${acctInfo.acctFname} ${acctInfo.acctLname}</a>
+                            <a href="my-profile" class="text-white-center">${acctInfo.acctFname} ${acctInfo.acctLname}</a>
                         </h5>
                     </div>
                     <div id="chat-block">
