@@ -70,6 +70,13 @@ public class HomeController {
         return "my-profile";
     }
 
+    @RequestMapping("/dreamers-profile")
+    public String dreamersProfile(Model model, @CookieValue(required = false, name = "userId") String userId, @RequestParam(name = "dreamerId") String dreamerId) {
+        AccountEntity acct = loginHelper.getAcctUsingId(dreamerId);
+        model.addAttribute("acctInfo", acct);
+        return "dreamers-profile";
+    }
+
     @RequestMapping("/edit-profile-basic")
     public String editProfileBasic() {
         return "edit-profile-basic";

@@ -73,7 +73,7 @@
                         <ul class="online-users list-inline">
                             <c:forEach var="friend" items="${topFriends}">
                                 <li>
-                                    <a href="newsfeed-messages" title="${friend.acctFname} ${friend.acctLname}"><img src="${friend.acctPic}" alt="user" class="img-responsive profile-photo" />
+                                    <a href="/dreamers-profile?dreamerId=${friend.acctId}" title="${friend.acctFname} ${friend.acctLname}"><img src="${friend.acctPic}" alt="user" class="img-responsive profile-photo" />
                                         <span class="online-dot"></span>
                                     </a>
                                 </li>
