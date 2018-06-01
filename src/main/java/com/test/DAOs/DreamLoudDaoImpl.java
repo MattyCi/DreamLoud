@@ -346,4 +346,26 @@ public class DreamLoudDaoImpl implements DreamLoudDao {
             session.close();
         }
     }
+
+    public DreamersEntity getDreamer(String userId, String dreamerId) {
+        Session session = factory.openSession();
+        DreamersEntity dream = (DreamersEntity) session.createQuery("from DreamersEntity where acctId = " + userId + " and acctId2 =" +dreamerId).setMaxResults(1).uniqueResult();
+        session.close();
+        return dream;
+    }
+
+    public void removeDreamer(DreamersEntity dreamer) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(dreamer);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
 }

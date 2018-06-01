@@ -59,4 +59,8 @@ public interface DreamLoudDao {
     ArrayList<AccountEntity> getAccountsByIds(ArrayList<Integer> dreamerIds);
 
     void addDreamers(DreamersEntity dreamersEntity);
+
+    DreamersEntity getDreamer(String userId, String dreamerId);
+
+    void removeDreamer(DreamersEntity dreamer);
 }

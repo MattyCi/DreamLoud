@@ -61,7 +61,14 @@
                         <h5>
                             <a href="my-profile" class="text-white-center">${dreamerAcct.acctFname} ${dreamerAcct.acctLname}</a>
                         </h5>
-                        <a href="/addDreamer?dreamerId=${dreamerAcct.acctId}" class="details-button" style="color: red">Add Dreamer</a>
+                        <c:choose>
+                            <c:when test="${isDreamer}">
+                                <a href="/removeDreamer?dreamerId=${dreamerAcct.acctId}" class="details-button" style="color: red">Remove Dreamer</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="/addDreamer?dreamerId=${dreamerAcct.acctId}" class="details-button" style="color: green">Add Dreamer</a>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div id="chat-block">
                         <div class="title">Dreamers</div>

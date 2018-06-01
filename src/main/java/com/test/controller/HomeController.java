@@ -87,6 +87,7 @@ public class HomeController {
         } else {
             model.addAttribute("dreamerAcct", dreamerAcct);
             model.addAttribute("acctInfo", acct);
+            model.addAttribute("isDreamer", accountHelper.isDreamer(userId, dreamerId));
             friends = accountHelper.getTopFriends(dreamerId);
             model.addAttribute("topFriends", friends);
         }
@@ -238,6 +239,12 @@ public class HomeController {
     @RequestMapping("/addDreamer")
     public String addDreamer(@CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamerId") String dreamerId, HttpServletRequest request) {
         accountHelper.addFriend(userId, dreamerId);
+        return "redirect:" + request.getHeader("Referer");
+    }
+
+    @RequestMapping("/removeDreamer")
+    public String removeDreamer(@CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamerId") String dreamerId, HttpServletRequest request) {
+        accountHelper.removeFriend(userId, dreamerId);
         return "redirect:" + request.getHeader("Referer");
     }
 

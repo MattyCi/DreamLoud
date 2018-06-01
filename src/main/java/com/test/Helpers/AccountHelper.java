@@ -56,4 +56,16 @@ public class AccountHelper {
         }
         return dao.getAccountsByIds(dreamerIds);
     }
+
+    public boolean isDreamer(String userId, String dreamerId){
+        DreamersEntity dreamersEntity = dao.getDreamer(userId, dreamerId);
+        if (dreamersEntity == null){
+            return false;
+        }
+        return true;
+    }
+
+    public void removeFriend(String userId, String dreamerId) {
+        dao.removeDreamer(dao.getDreamer(userId, dreamerId));
+    }
 }
