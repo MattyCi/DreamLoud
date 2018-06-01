@@ -35,8 +35,8 @@
                 <a href="#"><img id="logo1" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
             </div>
             <div class="col-xs-6 col-sm-4 profile-card">
-                <img src="${userAcct.acctPic}" alt="user" class="profile-photo"/>
-                <h5><a href="timeline" class="text-white-center">${userAcct.acctFname} ${userAcct.acctLname}</a></h5>
+                <img src="${dreamerAcct.acctPic}" alt="user" class="profile-photo"/>
+                <h5><a href="timeline" class="text-white-center">${dreamerAcct.acctFname} ${dreamerAcct.acctLname}</a></h5>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-2">
                 <ul class="nav-news-feed">
@@ -57,20 +57,32 @@
                 <a id="logolink" href="#"><img id="logo2" src="./resources/images/dl_logo_2_trans.png" alt="logo"></a>
                 <div class="sticky-sidebar">
                     <div class="profile-card">
-                        <img src="${acctInfo.acctPic}" alt="user" class="profile-photo"/>
+                        <img src="${dreamerAcct.acctPic}" alt="user" class="profile-photo"/>
                         <h5>
-                            <a href="my-profile" class="text-white-center">${acctInfo.acctFname} ${acctInfo.acctLname}</a>
+                            <a href="my-profile" class="text-white-center">${dreamerAcct.acctFname} ${dreamerAcct.acctLname}</a>
                         </h5>
+                        <a href="/addDreamer?dreamerId=${dreamerAcct.acctId}" class="details-button" style="color: red">Add Dreamer</a>
                     </div>
                     <div id="chat-block">
                         <div class="title">Dreamers</div>
                         <ul class="online-users list-inline">
                             <c:forEach var="friend" items="${topFriends}">
-                                <li>
-                                    <a href="newsfeed-messages" title="${friend.acctFname} ${friend.acctLname}"><img src="${friend.acctPic}" alt="user" class="img-responsive profile-photo" />
-                                        <span class="online-dot"></span>
-                                    </a>
-                                </li>
+                                <c:choose>
+                                    <c:when test="${friend.acctId eq acctInfo.acctId}">
+                                        <li>
+                                            <a href="/my-profile" title="You"><img src="${friend.acctPic}" alt="user" class="img-responsive profile-photo" />
+                                                <span class="online-dot"></span>
+                                            </a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li>
+                                            <a href="/dreamers-profile?dreamerId=${friend.acctId}" title="${friend.acctFname} ${friend.acctLname}"><img src="${friend.acctPic}" alt="user" class="img-responsive profile-photo" />
+                                                <span class="online-dot"></span>
+                                            </a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
                         </ul>
                     </div>

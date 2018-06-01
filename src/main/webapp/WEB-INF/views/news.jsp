@@ -89,6 +89,14 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-7 row-stretch">
             <c:forEach var="post" items="${dreamPosts}">
+                <c:choose>
+                    <c:when test="${post.acctId eq acctInfo.acctId}">
+                        <c:set var="profileLink" value="/my-profile"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="profileLink" value="/dreamers-profile?dreamerId=${post.acctId}"/>
+                    </c:otherwise>
+                </c:choose>
                 <div class="post-content">
                     <div class="post-container" id="${post.postId}">
                         <span class="text-dream"><a href="/dream?dreamId=${post.dreamId}" class="profile-link"><i class="ion-code-working"></i> ${post.dreamName}</a></span>
@@ -114,7 +122,7 @@
                         <div class="line-divider-half"></div>
                         <div class="post-detail">
                             <div class="user-info">
-                                <h5><img src="${post.userPic}" alt="user" class="profile-photo-sm"/><a href="timeline" class="profile-link">${post.userName}</a></h5>
+                                <h5><img src="${post.userPic}" alt="user" class="profile-photo-sm"/><a href="${profileLink}" class="profile-link">${post.userName}</a></h5>
                                 <p class="text-muted">${post.postDate}</p>
                             </div>
                             <div class="line-divider"></div>
@@ -123,11 +131,19 @@
                             </div>
                             <div class="line-divider"></div>
                             <c:forEach var="comment" items="${post.comments}" varStatus="status" >
+                                <c:choose>
+                                    <c:when test="${comment.acctId eq acctInfo.acctId}">
+                                        <c:set var="profileLink" value="/my-profile"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:set var="profileLink" value="/dreamers-profile?dreamerId=${comment.acctId}"/>
+                                    </c:otherwise>
+                                </c:choose>
                             <div class="comment">
                                 <c:if test="${status.index == 0}">
                                     <div class="post-comment">
 
-                                        <p><img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/><a href="timeline" class="profile-link">${comment.username}</a>: ${comment.content}</p>
+                                        <p><img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/><a href="${profileLink}" class="profile-link">${comment.username}</a>: ${comment.content}</p>
                                     </div>
                                 </c:if>
                                 <c:if test="${status.index ==1}">
@@ -137,7 +153,7 @@
                                     </div>
                                 </c:if>
                                 <div class="hide-comment">
-                                    <p><img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/><a href="timeline" class="profile-link">${comment.username} </a></p>
+                                    <p><img src="${comment.acctPictureUrl}" alt="" class="profile-photo-sm"/><a href="${profileLink}" class="profile-link">${comment.username} </a></p>
                                     <div class="comment-text">
                                         <p>: ${comment.content}</p>
                                     </div>

@@ -36,6 +36,7 @@ public class NewsfeedHelper {
             translatedPost.setFollowingDream(isFollowingDream(userId, String.valueOf(dream.getDrmId())));
             translatedPost.setPostDate(getPostDateFormatted(post));
             translatedPost.setNumberOfFollowers(getNumOfFollwers(dream));
+            translatedPost.setAcctId(String.valueOf(post.getAcctId()));
             translatedPosts.add(translatedPost);
         }
         return translatedPosts;
@@ -50,6 +51,7 @@ public class NewsfeedHelper {
             comment.setContent(new String(commentEntity.getCommentContent()));
             comment.setUsername(commentAcct.getAcctFname() +" "+ commentAcct.getAcctLname());
             comment.setAcctPictureUrl(commentAcct.getAcctPic());
+            comment.setAcctId(String.valueOf(commentAcct.getAcctId()));
             comments.add(comment);
         }
         return comments;

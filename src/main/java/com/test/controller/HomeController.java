@@ -66,14 +66,30 @@ public class HomeController {
     @RequestMapping("/my-profile")
     public String myProfile(Model model, @CookieValue(required = false, name = "userId") String userId) {
         AccountEntity acct = loginHelper.getAcctUsingId(userId);
-        model.addAttribute("acctInfo", acct);
+        ArrayList<AccountEntity> friends;
+        if(acct == null) {
+            return "redirect:/index";
+        } else {
+            model.addAttribute("acctInfo", acct);
+            friends = accountHelper.getTopFriends(userId);
+            model.addAttribute("topFriends", friends);
+        }
         return "my-profile";
     }
 
     @RequestMapping("/dreamers-profile")
     public String dreamersProfile(Model model, @CookieValue(required = false, name = "userId") String userId, @RequestParam(name = "dreamerId") String dreamerId) {
-        AccountEntity acct = loginHelper.getAcctUsingId(dreamerId);
-        model.addAttribute("acctInfo", acct);
+        AccountEntity dreamerAcct = loginHelper.getAcctUsingId(dreamerId);
+        AccountEntity acct = loginHelper.getAcctUsingId(userId);
+        ArrayList<AccountEntity> friends;
+        if(acct == null) {
+            return "redirect:/index";
+        } else {
+            model.addAttribute("dreamerAcct", dreamerAcct);
+            model.addAttribute("acctInfo", acct);
+            friends = accountHelper.getTopFriends(dreamerId);
+            model.addAttribute("topFriends", friends);
+        }
         return "dreamers-profile";
     }
 
@@ -219,9 +235,10 @@ public class HomeController {
         return newsfeed(model, userId);
     }
 
-    @RequestMapping("/addFriend")
-    public void addFriend(@CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamerId") String dreamerId) {
-        AccountHelper.addFriend(userId, dreamerId);
+    @RequestMapping("/addDreamer")
+    public String addDreamer(@CookieValue(required = false, name = "userId") String userId, @RequestParam(required = false, name = "dreamerId") String dreamerId, HttpServletRequest request) {
+        accountHelper.addFriend(userId, dreamerId);
+        return "redirect:" + request.getHeader("Referer");
     }
 
     @RequestMapping("/newsfeed-friends")

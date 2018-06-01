@@ -57,4 +57,6 @@ public interface DreamLoudDao {
     DreamsEntity getDreamByName(String dreamName);
 
     ArrayList<AccountEntity> getAccountsByIds(ArrayList<Integer> dreamerIds);
+
+    void addDreamers(DreamersEntity dreamersEntity);
 }

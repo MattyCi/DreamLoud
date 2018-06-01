@@ -331,4 +331,19 @@ public class DreamLoudDaoImpl implements DreamLoudDao {
         }
         return dreamerAccts;
     }
+
+    public void addDreamers(DreamersEntity dreamersEntity) {
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(dreamersEntity);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
 }

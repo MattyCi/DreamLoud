@@ -12,9 +12,18 @@ public class TranslatedPosts {
     private ArrayList<PostComments> comments;
     private String postId;
     private String userPic;
+    private String acctId;
     private String postDate;
     private String numberOfFollowers;
     private boolean isFollowingDream;
+
+    public String getAcctId() {
+        return acctId;
+    }
+
+    public void setAcctId(String acctId) {
+        this.acctId = acctId;
+    }
 
     public String getNumberOfFollowers() {
         return numberOfFollowers;

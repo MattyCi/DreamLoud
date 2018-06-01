@@ -6,6 +6,16 @@ public class PostComments {
     public String content;
     public String acctPictureUrl;
 
+    public String getAcctId() {
+        return acctId;
+    }
+
+    public void setAcctId(String acctId) {
+        this.acctId = acctId;
+    }
+
+    public String acctId;
+
     public String getUsername() {
         return username;
     }

@@ -4,6 +4,7 @@ import com.test.DAOs.DreamLoudDao;
 import com.test.Models.AccountEntity;
 import com.test.Models.DreamersEntity;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -34,8 +35,12 @@ public class AccountHelper {
         }
     }
 
-    public static void addFriend(String userId, String dreamerId) {
-
+    public void addFriend(String userId, String dreamerId) {
+        DreamersEntity dreamersEntity = new DreamersEntity();
+        dreamersEntity.setAcctId(Integer.parseInt(userId));
+        dreamersEntity.setAcctId2(Integer.parseInt(dreamerId));
+        dreamersEntity.setDrmrReqDatetime(new Timestamp(System.currentTimeMillis()));
+        dao.addDreamers(dreamersEntity);
     }
 
     public ArrayList<AccountEntity> getFriends(String userId) {
