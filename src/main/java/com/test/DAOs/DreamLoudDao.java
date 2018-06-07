@@ -63,4 +63,10 @@ public interface DreamLoudDao {
     DreamersEntity getDreamer(String userId, String dreamerId);
 
     void removeDreamer(DreamersEntity dreamer);
+
+    ArrayList<DreamPostsEntity> getRecentPosts(String dreamerId);
+
+    ArrayList<PostCommentsEntity> getRecentComments(String dreamerId);
+
+    DreamPostsEntity getDreamPostByPostId(String postId);
 }

@@ -59,7 +59,7 @@
                     <div class="profile-card">
                         <img src="${dreamerAcct.acctPic}" alt="user" class="profile-photo"/>
                         <h5>
-                            <a href="my-profile" class="text-white-center">${dreamerAcct.acctFname} ${dreamerAcct.acctLname}</a>
+                            <p class="text-white-center">${dreamerAcct.acctFname} ${dreamerAcct.acctLname}</p>
                         </h5>
                         <c:choose>
                             <c:when test="${isDreamer}">
@@ -100,6 +100,11 @@
                     <div class="post-container">
                         YOOOOOOOO
                     </div>
+                    <c:forEach var="activity" items="${recentActivity}">
+                        <div class="post-container">
+                            ${activity.activity} on ${activity.date} on ${activity.dreamName}
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
             <div class="hidden-xs hidden-sm col-md-2 sticky-sidebar">

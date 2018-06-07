@@ -368,4 +368,45 @@ public class DreamLoudDaoImpl implements DreamLoudDao {
             session.close();
         }
     }
+
+    public ArrayList<DreamPostsEntity> getRecentPosts(String dreamerId) {
+        ArrayList<DreamPostsEntity> posts = new ArrayList<DreamPostsEntity>();
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            posts = (ArrayList<DreamPostsEntity>) session.createQuery("FROM DreamPostsEntity where acctId=" + dreamerId).setMaxResults(10).list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return posts;
+    }
+
+    public ArrayList<PostCommentsEntity> getRecentComments(String dreamerId) {
+        ArrayList<PostCommentsEntity> comments = new ArrayList<PostCommentsEntity>();
+        Session session = factory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            comments = (ArrayList<PostCommentsEntity>) session.createQuery("FROM PostCommentsEntity where acctId=" + dreamerId).setMaxResults(10).list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return comments;
+    }
+
+    public DreamPostsEntity getDreamPostByPostId(String postId) {
+        Session session = factory.openSession();
+        DreamPostsEntity post = (DreamPostsEntity) session.createQuery("from DreamPostsEntity where dreamPostId = " + postId).setMaxResults(1).uniqueResult();
+        session.close();
+        return post;
+    }
 }

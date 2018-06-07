@@ -70,6 +70,7 @@ public class HomeController {
         if(acct == null) {
             return "redirect:/index";
         } else {
+            model.addAttribute("recentActivity", newsfeedHelper.getRecentActivity(userId));
             model.addAttribute("acctInfo", acct);
             friends = accountHelper.getTopFriends(userId);
             model.addAttribute("topFriends", friends);
@@ -85,6 +86,7 @@ public class HomeController {
         if(acct == null) {
             return "redirect:/index";
         } else {
+            model.addAttribute("recentActivity", newsfeedHelper.getRecentActivity(dreamerId));
             model.addAttribute("dreamerAcct", dreamerAcct);
             model.addAttribute("acctInfo", acct);
             model.addAttribute("isDreamer", accountHelper.isDreamer(userId, dreamerId));

@@ -5,6 +5,8 @@ public class PostComments {
     public String username;
     public String content;
     public String acctPictureUrl;
+    public String date;
+    public String postId;
 
     public String getAcctId() {
         return acctId;
@@ -40,5 +42,19 @@ public class PostComments {
         this.acctPictureUrl = acctPictureUrl;
     }
 
+    public String getDate() {
+        return date;
+    }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
 }
