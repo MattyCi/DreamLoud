@@ -48,7 +48,7 @@
     <a href="/newsfeed">Back to Homepage</a>
 </p>
 <header><h1>Admin Console</h1></header>
-<form:form action="/addUser">
+<form:form action="/dreamloud/addUser">
     <section>
         <fieldset>
             <legend>
@@ -85,7 +85,7 @@
         </fieldset>
     </section>
 </form:form>
-<form:form action="/addDream">
+<form:form action="/dreamloud/addDream">
     <section>
         <fieldset>
             <legend>
@@ -106,7 +106,7 @@
         </fieldset>
     </section>
 </form:form>
-<form:form action="/removeUser">
+<form:form action="/dreamloud/removeUser">
     <section>
         <fieldset>
             <legend>
@@ -131,7 +131,7 @@
         </fieldset>
     </section>
 </form:form>
-<form:form action="/removeDream">
+<form:form action="/dreamloud/removeDream">
     <section>
         <fieldset>
             <legend>

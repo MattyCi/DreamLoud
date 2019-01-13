@@ -141,7 +141,7 @@
                                 </c:forEach>
                                 <div class="post-comment">
                                     <img src="${acctInfo.acctPic}" alt="" class="profile-photo-sm">
-                                    <form:form action="/postComment">
+                                    <form:form action="/dreamloud/postComment">
                                         <input type="hidden" name="postId" value="${post.postId}">
                                         <input type="hidden" name="userId" value="${acctInfo.acctId}">
                                         <input type="text" name="commentContent" class="form-control" placeholder="Post a comment">

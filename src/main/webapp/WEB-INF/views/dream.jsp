@@ -42,7 +42,7 @@
 
                     <c:choose>
                         <c:when test="${dreamInfo.drmId == 1}">
-                            <form:form action="/followDream" id="followForm">
+                            <form:form action="/dreamloud/followDream" id="followForm">
                                 <input type="hidden" name="dreamId" value="${dreamInfo.drmId}"/>
                             </form:form>
                             <span class="text-dream-follow">
@@ -53,7 +53,7 @@
                         </span>
                         </c:when>
                         <c:otherwise>
-                            <form:form action="/unfollowDream" id="followForm">
+                            <form:form action="/dreamloud/unfollowDream" id="followForm">
                                 <input type="hidden" name="dreamId" value="${dreamInfo.drmId}"/>
                             </form:form>
                             <span class="text-dream-follow">
@@ -106,7 +106,7 @@
             <div class="col-md-7">
 
                 <div class="create-post">
-                    <form:form action="/createPost">
+                    <form:form action="/dreamloud/createPost">
                     <input type="hidden" value="${acctInfo.acctId}" name="userId"/>
                     <input type="hidden" value="${dreamInfo.drmId}" name="dreamId"/>
                     <div class="row">
@@ -145,7 +145,7 @@
                                             <c:when test="${!post.followingDream}">
                                             </c:when>
                                             <c:otherwise>
-                                                <form:form action="/unfollowDream" id="followForm_${post.postId}">
+                                                <form:form action="/dreamloud/unfollowDream" id="followForm_${post.postId}">
                                                     <input type="hidden" name="dreamId" value="${post.dreamId}"/>
                                                 </form:form>
                                                 <span class="text-dream-follow">
@@ -194,7 +194,7 @@
                                 </c:forEach>
                                 <div class="post-comment">
                                     <img src="${acctInfo.acctPic}" alt="" class="profile-photo-sm">
-                                    <form:form action="/postComment">
+                                    <form:form action="/dreamloud/postComment">
                                         <input type="hidden" name="postId" value="${post.postId}">
                                         <input type="hidden" name="userId" value="${acctInfo.acctId}">
                                         <input type="text" name="commentContent" class="form-control"

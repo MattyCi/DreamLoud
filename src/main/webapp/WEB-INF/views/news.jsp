@@ -162,7 +162,7 @@
                             </c:forEach>
                             <div class="line-divider"></div>
                             <div class="comment-form">
-                                <form:form action="/postComment">
+                                <form:form action="/dreamloud/postComment">
                                     <img src="${acctInfo.acctPic}" alt="" class="profile-photo-sm">
                                     <input type="hidden" name="postId" value="${post.postId}">
                                     <input type="hidden" name="userId" value="${acctInfo.acctId}">
