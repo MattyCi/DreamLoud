@@ -12,7 +12,7 @@ public class DreamersEntity {
     private int acctAcctId;
 
     @Id
-    @Column(name = "ACCT_ID", nullable = false)
+    @Column(name = "ACCT", nullable = false)
     public int getAcctId() {
         return acctId;
     }

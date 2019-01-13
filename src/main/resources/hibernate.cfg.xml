@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.MySQL5Dialect
+        </property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://dreamloud.cucrzjoufjnt.us-east-2.rds.amazonaws.com:3306/dreamloudPROD</property>
+        <property name="connection.username">
+            dreamloudmaster
+        </property>
+        <property name="connection.password">
+            DreamLoud0010!
+        </property>
+        <mapping class="com.test.Models.AccountEntity"/>
+        <mapping resource="AccountEntity.hbm.xml"/>
+        <mapping class="com.test.Models.DreamPostsEntity"/>
+        <mapping resource="AccountEntity.hbm.xml"/>
+        <mapping class="com.test.Models.PostCommentsEntity"/>
+        <mapping resource="AccountEntity.hbm.xml"/>
+        <mapping resource="DreamsEntity.hbm.xml"/>
+        <mapping class="com.test.Models.DreamsEntity"/>
+        <mapping resource="DreammemsEntity.hbm.xml"/>
+        <mapping class="com.test.Models.DreammemsEntity"/>
+        <mapping class="com.test.Models.DreamersEntity"/>
+        <mapping resource="DreamersEntity.hbm.xml"/>
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

@@ -7,7 +7,7 @@ import java.util.Arrays;
  * Created by Aaron on 1/29/2018.
  */
 @Entity
-@Table(name = "Post_Comments", schema = "dreamloudPROD", catalog = "")
+@Table(name = "post_comments", schema = "dreamloudPROD", catalog = "")
 public class PostCommentsEntity {
     private int commentId;
     private byte[] commentContent;
@@ -15,6 +15,7 @@ public class PostCommentsEntity {
     private Integer acctId;
     private Integer postId;
 
+    @Column(name = "post_id", nullable = false)
     public Integer getPostId() {
         return postId;
     }
@@ -22,7 +23,8 @@ public class PostCommentsEntity {
     public void setPostId(Integer postId) {
         this.postId = postId;
     }
-
+    
+    @Column(name = "acct_id")
     public Integer getAcctId() {
         return acctId;
     }
@@ -32,7 +34,7 @@ public class PostCommentsEntity {
     }
 
     @Id
-    @Column(name = "commentId", nullable = false)
+    @Column(name = "comment_id", nullable = false)
     public int getCommentId() {
         return commentId;
     }

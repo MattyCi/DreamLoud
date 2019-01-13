@@ -50,7 +50,7 @@
                   <p>Log in to your account</p>
 
                   <!--Login Form-->
-                    <form:form action="/loginUser">
+                    <form:form action="/dreamloud/loginUser">
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <label for="email_input" class="sr-only">Email</label>

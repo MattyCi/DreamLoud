@@ -9,7 +9,7 @@
             <column name="ACCT_ACCT_ID" sql-type="int(11)"/>
         </id>
         <property name="acctId">
-            <column name="ACCT_ID" sql-type="int(11)"/>
+            <column name="ACCT" sql-type="int(11)"/>
         </property>
         <property name="acctId2">
             <column name="ACCT_ID_2" sql-type="int(11)"/>

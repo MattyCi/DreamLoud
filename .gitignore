@@ -16,6 +16,3 @@ log/
 target/
 
 *.class
-
-#hibernate
-hibernate.cfg.xml

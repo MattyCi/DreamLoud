@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 
 @Entity
-@Table(name = "Dream_Posts", schema = "dreamloudPROD", catalog = "")
+@Table(name = "dream_posts", schema = "dreamloudPROD", catalog = "")
 public class DreamPostsEntity {
     private int dreamPostId;
     private String postTitle;
@@ -24,7 +24,6 @@ public class DreamPostsEntity {
     public void setDatePosted(Timestamp datePosted) {
         this.datePosted = datePosted;
     }
-
 
     @Basic
     @Column(name = "DRM_ID", nullable = false)
@@ -47,7 +46,7 @@ public class DreamPostsEntity {
     }
 
     @Id
-    @Column(name = "Dream_postId", nullable = false)
+    @Column(name = "DREAM_POST_ID", nullable = false)
     public int getDreamPostId() {
         return dreamPostId;
     }
@@ -57,7 +56,7 @@ public class DreamPostsEntity {
     }
 
     @Basic
-    @Column(name = "Post_Title", nullable = true, length = 255)
+    @Column(name = "POST_TITLE", nullable = true, length = 255)
     public String getPostTitle() {
         return postTitle;
     }
@@ -67,7 +66,7 @@ public class DreamPostsEntity {
     }
 
     @Basic
-    @Column(name = "Post_content", nullable = true)
+    @Column(name = "POST_CONTENT", nullable = true)
     public byte[] getPostContent() {
         return postContent;
     }
@@ -77,7 +76,7 @@ public class DreamPostsEntity {
     }
 
     @Basic
-    @Column(name = "Post_Pic", nullable = true)
+    @Column(name = "POST_PIC", nullable = true)
     public byte[] getPostPic() {
         return postPic;
     }
