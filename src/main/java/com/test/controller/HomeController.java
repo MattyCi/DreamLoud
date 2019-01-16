@@ -1,5 +1,6 @@
 package com.test.controller;
 
+import com.dreamloud.auth.ShiroLogInAction;
 import com.test.DAOs.DreamLoudDao;
 import com.test.DaoFactory.DaoFactory;
 import com.test.DaoFactory.DaoOptions;
@@ -43,7 +44,13 @@ public class HomeController {
     public String loginUser(@RequestParam(required = false, name="email") String email, @RequestParam(required = false, name="password") String password, HttpServletResponse response)
     {
         AccountEntity acct = loginHelper.loginUsingEmailAndPassword(email, password);
-        if (acct == null){
+        
+        ShiroLogInAction loginAction = new ShiroLogInAction();
+        loginAction.setEmail(email);
+        loginAction.setPassword(password);
+        loginAction.logInUser();
+        
+        if (!loginAction.isAuthenticated()){
             return "redirect:/index";
         } else {
             setCookie(response, "userId", String.valueOf(acct.getAcctId()));

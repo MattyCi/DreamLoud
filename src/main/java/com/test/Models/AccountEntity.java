@@ -22,6 +22,7 @@ public class AccountEntity implements Serializable {
     private String acctBio;
     private byte acctOnline;
     private byte acctFlgn;
+    private String salt;
 
     @Id
     @Column(name = "ACCT_ID", nullable = false)
@@ -163,6 +164,15 @@ public class AccountEntity implements Serializable {
         this.acctFlgn = acctFlgn;
     }
 
+    @Column(name = "SALT")
+    public String getSalt() {
+		return this.salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

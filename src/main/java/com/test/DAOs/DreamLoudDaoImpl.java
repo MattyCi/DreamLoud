@@ -110,7 +110,7 @@ public class DreamLoudDaoImpl implements DreamLoudDao {
     public void deleteDreamer(String acctId) {
 
     }
-
+    
     public AccountEntity getAccountByEmailAndPassword(String email, String password) {
         Session session = factory.openSession();
         AccountEntity acct = (AccountEntity) session.createQuery("from AccountEntity where acctEmail = '" + email + "' and acctPw= '" + password + "'").setMaxResults(1).uniqueResult();

@@ -14,6 +14,10 @@ public class LoginHelper {
         return dao.getAccountByEmailAndPassword(email, password);
     }
 
+    public  AccountEntity getAcctUsingEmail(String email) {
+        return dao.getAccountByEmail(email);
+    }
+    
     public AccountEntity getAcctUsingId(String userId){
         return dao.getAccountById(userId);
     }
